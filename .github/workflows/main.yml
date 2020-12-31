@@ -31,8 +31,8 @@ jobs:
             --build-arg UBUNTU_VERSION=${{ matrix.ubuntu_version }} \
             --build-arg PYTHON_VERSION=${{ matrix.python_version }} \
             -t wden:"$TAG" \
-            -f dockerfile/devel-cuda \
+            -f dockerfile/devel_cuda \
             .
 
           docker login --username=wden --password=${{ secrets.DOCKER_PASSWORD }}
-          docker push wden:"$TAG"
+          docker push wden/wden:"$TAG"
