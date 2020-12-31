@@ -1,7 +1,7 @@
 ARG UBUNTU_VERSION
 
 # https://hub.docker.com/r/nvidia/cuda/tags
-FROM ubuntu/${UBUNTU_VERSION}
+FROM ubuntu:${UBUNTU_VERSION}
 
 ARG PYTHON_VERSION
 
