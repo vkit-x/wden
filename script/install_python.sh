@@ -19,8 +19,11 @@ apt-get install -y \
     python"$PYTHON_VERSION"-venv
 
 curl --silent --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | python"$PYTHON_VERSION"
+
 # Allow non-root user to install package.
 chmod 777 /usr/local/lib/python"$PYTHON_VERSION"/dist-packages
+chmod 777 /usr/local/bin
+chmod 777 /usr/local/sbin
 
 # Change the system default python/python3.
 update-alternatives --install /usr/bin/python python /usr/bin/python"$PYTHON_VERSION" 1

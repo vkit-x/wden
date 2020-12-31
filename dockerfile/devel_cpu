@@ -20,7 +20,7 @@ ENV PYTHONIOENCODING=UTF-8 \
     FIXUID_USER=wden \
     FIXUID_GROUP=wden
 
-RUN "$WDEN_SCRIPT_FOLDER"/devel_cuda.sh
+RUN "$WDEN_SCRIPT_FOLDER"/devel_cpu.sh
 
 # install_fixuid.sh
 USER "$FIXUID_USER":"$FIXUID_GROUP"
