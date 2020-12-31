@@ -14,13 +14,16 @@ COPY script "$DEN_SCRIPT_FOLDER"
 # PYTHONIOENCODING: sys.getdefaultencoding()
 # LC_CTYPE: sys.getfilesystemencoding()
 # LANG / LC_ALL: commonly used.
+# FIXUID_USER / FIXUID_GROUP: used by fixuid.
 ENV PYTHONIOENCODING=UTF-8 \
     LC_CTYPE=C.UTF-8 \
     LANG=C.UTF-8 \
-    LC_ALL=C.UTF-8
+    LC_ALL=C.UTF-8 \
+    FIXUID_USER=den \
+    FIXUID_GROUP=den
 
 RUN "$DEN_SCRIPT_FOLDER"/run.sh
 
 # install_fixuid.sh
-USER den:den
+USER "$FIXUID_USER":"$FIXUID_GROUP"
 ENTRYPOINT ["fixuid"]
