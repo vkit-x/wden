@@ -1,0 +1,27 @@
+ARG UBUNTU_VERSION
+
+# https://hub.docker.com/r/nvidia/cuda/tags
+FROM ubuntu/${UBUNTU_VERSION}
+
+ARG PYTHON_VERSION
+
+# Copy the setup files to image.
+ENV WDEN_SCRIPT_FOLDER /root/.den-script
+COPY script "$WDEN_SCRIPT_FOLDER"
+
+# PYTHONIOENCODING: sys.getdefaultencoding()
+# LC_CTYPE: sys.getfilesystemencoding()
+# LANG / LC_ALL: commonly used.
+# FIXUID_USER / FIXUID_GROUP: used by fixuid.
+ENV PYTHONIOENCODING=UTF-8 \
+    LC_CTYPE=C.UTF-8 \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
+    FIXUID_USER=wden \
+    FIXUID_GROUP=wden
+
+RUN "$WDEN_SCRIPT_FOLDER"/devel_cuda.sh
+
+# install_fixuid.sh
+USER "$FIXUID_USER":"$FIXUID_GROUP"
+ENTRYPOINT ["fixuid"]

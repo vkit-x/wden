@@ -5,7 +5,7 @@ on:
   push:
 
 jobs:
-  build:
+  build-cuda:
     runs-on: ubuntu-latest
 
     strategy:
@@ -32,6 +32,31 @@ jobs:
             --build-arg PYTHON_VERSION=${{ matrix.python_version }} \
             -t wden/wden:"$TAG" \
             -f dockerfile/devel_cuda \
+            .
+
+          docker login --username=wden --password=${{ secrets.DOCKER_PASSWORD }}
+          docker push wden/wden:"$TAG"
+
+  build-cpu:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        ubuntu_version: [18.04]
+        python_version: [3.6, 3.7, 3.8, 3.9]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Docker build & push
+        run: |
+          export TAG=devel-cpu-ubuntu${{ matrix.ubuntu_version }}-python${{ matrix.python_version }}
+
+          docker build \
+            --build-arg UBUNTU_VERSION=${{ matrix.ubuntu_version }} \
+            --build-arg PYTHON_VERSION=${{ matrix.python_version }} \
+            -t wden/wden:"$TAG" \
+            -f dockerfile/devel_cpu \
             .
 
           docker login --username=wden --password=${{ secrets.DOCKER_PASSWORD }}
