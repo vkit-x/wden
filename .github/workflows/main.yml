@@ -29,6 +29,11 @@ jobs:
             --build-arg CUDNN_VERSION=${{ matrix.cudnn_version }} \
             --build-arg UBUNTU_VERSION=${{ matrix.ubuntu_version }} \
             --build-arg PYTHON_VERSION=${{ matrix.python_version }} \
-            -t den:"$TAG" \
+            -t wden:"$TAG" \
             -f dockerfile/devel-cuda \
             .
+
+      - name: Docker push
+        run: |
+          docker login --username=wden --password=${{ secrets.DOCKER_PASSWORD }}
+          docker push wden:"$TAG"
