@@ -1,0 +1,5 @@
+  
+name: build-and-push
+
+on:
+  push:
