@@ -7,3 +7,4 @@ set -e
 apt-get update
 
 "$DEN_SCRIPT_FOLDER"/apt_install_pkgs_for_dev.sh
+"$DEN_SCRIPT_FOLDER"/configure_oh_my_zsh.sh
