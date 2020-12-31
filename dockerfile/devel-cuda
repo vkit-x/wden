@@ -20,3 +20,7 @@ ENV PYTHONIOENCODING=UTF-8 \
     LC_ALL=C.UTF-8
 
 RUN "$DEN_SCRIPT_FOLDER"/run.sh
+
+# install_fixuid.sh
+USER den:den
+ENTRYPOINT ["fixuid"]

@@ -10,3 +10,4 @@ apt-get update
 "$DEN_SCRIPT_FOLDER"/install_python.sh
 "$DEN_SCRIPT_FOLDER"/configure_oh_my_zsh.sh
 "$DEN_SCRIPT_FOLDER"/configure_sudo.sh
+"$DEN_SCRIPT_FOLDER"/install_fixuid.sh
