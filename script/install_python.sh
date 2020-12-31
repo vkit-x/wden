@@ -6,6 +6,10 @@ apt-get update
 
 echo "Install PYTHON_VERSION=${PYTHON_VERSION}"
 
+# Required for building python.
+# Ubuntu 16.04 doesn't contain python3-distutils, and it's ok to ignore.
+apt-get install --ignore-missing -y python3-distutils || true
+
 apt-get install -y \
     python"$PYTHON_VERSION" \
     python"$PYTHON_VERSION"-dev \
