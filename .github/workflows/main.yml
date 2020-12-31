@@ -25,4 +25,5 @@ jobs:
             --build-arg CUDNN_VERSION=${{ matrix.cudnn_version }} \
             --build-arg UBUNTU_VERSION=${{ matrix.ubuntu_version }} \
             -t den:"$TAG" \
-            dockerfile/cuda-devel
+            -f cuda-devel \
+            dockerfile/
