@@ -30,7 +30,7 @@ jobs:
             --build-arg CUDNN_VERSION=${{ matrix.cudnn_version }} \
             --build-arg UBUNTU_VERSION=${{ matrix.ubuntu_version }} \
             --build-arg PYTHON_VERSION=${{ matrix.python_version }} \
-            -t wden:"$TAG" \
+            -t wden/wden:"$TAG" \
             -f dockerfile/devel_cuda \
             .
 
