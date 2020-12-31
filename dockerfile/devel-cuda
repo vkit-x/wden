@@ -19,8 +19,8 @@ ENV PYTHONIOENCODING=UTF-8 \
     LC_CTYPE=C.UTF-8 \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
-    FIXUID_USER=den \
-    FIXUID_GROUP=den
+    FIXUID_USER=wden \
+    FIXUID_GROUP=wden
 
 RUN "$WDEN_SCRIPT_FOLDER"/run.sh
 
