@@ -19,6 +19,7 @@ jobs:
 
       - name: Docker build
         run: |
+          ls -alh
           export TAG=cuda${{ matrix.cuda_version }}-cudnn${{ matrix.cudnn_version }}-ubuntu${{ matrix.ubuntu_version }}
           docker build \
             --build-arg CUDA_VERSION=${{ matrix.cuda_version }} \
