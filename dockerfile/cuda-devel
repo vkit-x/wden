@@ -1,0 +1,20 @@
+ARG CUDA_VERSION
+ARG CUDNN_VERSION
+ARG UBUNTU_VERSION
+
+# https://hub.docker.com/r/nvidia/cuda/tags
+FROM nvidia/cuda:${CUDA_VERSION}-cudnn${CUDNN_VERSION}-devel-ubuntu${UBUNTU_VERSION}
+
+# Copy the setup files to image.
+ENV DEN_SCRIPT_FOLDER /root/.den-script
+COPY script "$DEN_SCRIPT_FOLDER"
+
+# PYTHONIOENCODING: sys.getdefaultencoding()
+# LC_CTYPE: sys.getfilesystemencoding()
+# LANG / LC_ALL: commonly used.
+ENV PYTHONIOENCODING=UTF-8 \
+    LC_CTYPE=C.UTF-8 \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8
+
+RUN "$DEN_SCRIPT_FOLDER"/run.sh
