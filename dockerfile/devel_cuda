@@ -17,11 +17,9 @@ ENV PYTHONIOENCODING=UTF-8 \
     WDEN_RUN_FOLDER=/root/.wden-run
 
 COPY build "$WDEN_BUILD_FOLDER"
+COPY run "$WDEN_RUN_FOLDER"
 
 RUN "$WDEN_BUILD_FOLDER"/devel_cuda.sh
 
-COPY --chown="$FIXUID_USER":"$FIXUID_GROUP" run "$WDEN_RUN_FOLDER"
-
 # install_fixuid.sh
 USER "$FIXUID_USER":"$FIXUID_GROUP"
-ENTRYPOINT ["fixuid"]
