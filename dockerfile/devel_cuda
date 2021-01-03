@@ -8,8 +8,8 @@ FROM nvidia/cuda:${CUDA_VERSION}-cudnn${CUDNN_VERSION}-devel-ubuntu${UBUNTU_VERS
 ARG PYTHON_VERSION
 
 # Copy the setup files to image.
-ENV WDEN_SCRIPT_FOLDER /root/.den-script
-COPY script "$WDEN_SCRIPT_FOLDER"
+ENV WDEN_BUILD_FOLDER /root/.wden-build
+COPY build "$WDEN_BUILD_FOLDER"
 
 # PYTHONIOENCODING: sys.getdefaultencoding()
 # LC_CTYPE: sys.getfilesystemencoding()
@@ -22,7 +22,7 @@ ENV PYTHONIOENCODING=UTF-8 \
     FIXUID_USER=wden \
     FIXUID_GROUP=wden
 
-RUN "$WDEN_SCRIPT_FOLDER"/devel_cuda.sh
+RUN "$WDEN_BUILD_FOLDER"/devel_cuda.sh
 
 # install_fixuid.sh
 USER "$FIXUID_USER":"$FIXUID_GROUP"
