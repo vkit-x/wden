@@ -10,8 +10,8 @@ ENV PYTHONIOENCODING=UTF-8 \
     LC_ALL=C.UTF-8 \
     FIXUID_USER=wden \
     FIXUID_GROUP=wden \
-    WDEN_BUILD_FOLDER=/root/.wden-build \
-    WDEN_RUN_FOLDER=/root/.wden-run
+    WDEN_BUILD_FOLDER=/.wden-build \
+    WDEN_RUN_FOLDER=/.wden-run
 
 COPY build "$WDEN_BUILD_FOLDER"
 COPY run "$WDEN_RUN_FOLDER"
