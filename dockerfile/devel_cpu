@@ -5,13 +5,6 @@ FROM ubuntu:${UBUNTU_VERSION}
 
 ARG PYTHON_VERSION
 
-# Copy the sciprts to image.
-ENV WDEN_BUILD_FOLDER /root/.wden-build
-COPY build "$WDEN_BUILD_FOLDER"
-
-ENV WDEN_RUN_FOLDER /root/.wden-run
-COPY run "$WDEN_RUN_FOLDER"
-
 # PYTHONIOENCODING: sys.getdefaultencoding()
 # LC_CTYPE: sys.getfilesystemencoding()
 # LANG / LC_ALL: commonly used.
@@ -22,6 +15,13 @@ ENV PYTHONIOENCODING=UTF-8 \
     LC_ALL=C.UTF-8 \
     FIXUID_USER=wden \
     FIXUID_GROUP=wden
+
+# Copy the sciprts to image.
+ENV WDEN_BUILD_FOLDER /root/.wden-build
+COPY build "$WDEN_BUILD_FOLDER"
+
+ENV WDEN_RUN_FOLDER /root/.wden-run
+COPY --chown="$FIXUID_USER":"$FIXUID_GROUP" run "$WDEN_RUN_FOLDER"
 
 RUN "$WDEN_BUILD_FOLDER"/devel_cpu.sh
 
