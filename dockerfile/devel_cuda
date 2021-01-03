@@ -7,25 +7,20 @@ FROM nvidia/cuda:${CUDA_VERSION}-cudnn${CUDNN_VERSION}-devel-ubuntu${UBUNTU_VERS
 
 ARG PYTHON_VERSION
 
-# PYTHONIOENCODING: sys.getdefaultencoding()
-# LC_CTYPE: sys.getfilesystemencoding()
-# LANG / LC_ALL: commonly used.
-# FIXUID_USER / FIXUID_GROUP: used by fixuid.
 ENV PYTHONIOENCODING=UTF-8 \
     LC_CTYPE=C.UTF-8 \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     FIXUID_USER=wden \
-    FIXUID_GROUP=wden
+    FIXUID_GROUP=wden \
+    WDEN_BUILD_FOLDER=/root/.wden-build \
+    WDEN_RUN_FOLDER=/root/.wden-run
 
-# Copy the sciprts to image.
-ENV WDEN_BUILD_FOLDER /root/.wden-build
 COPY build "$WDEN_BUILD_FOLDER"
 
-ENV WDEN_RUN_FOLDER /root/.wden-run
-COPY --chown="$FIXUID_USER":"$FIXUID_GROUP" run "$WDEN_RUN_FOLDER"
-
 RUN "$WDEN_BUILD_FOLDER"/devel_cuda.sh
+
+COPY --chown="$FIXUID_USER":"$FIXUID_GROUP" run "$WDEN_RUN_FOLDER"
 
 # install_fixuid.sh
 USER "$FIXUID_USER":"$FIXUID_GROUP"
