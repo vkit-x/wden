@@ -39,12 +39,13 @@ plugins=(
   git
 )
 source $ZSH/oh-my-zsh.sh
-
-eval "$(direnv hook zsh)"
 EOF
 )
 
 echo "$OH_MY_ZSH_CONFIG" > "$ZDOTDIR/.zshrc"
+
+# Initialize direnv.
+printf '\n%s\n' 'eval "$(direnv hook zsh)"' >> "$ZDOTDIR/.zshrc"
 
 # Grant all user the access.
 chmod -R 755 $ZSH_HOME
