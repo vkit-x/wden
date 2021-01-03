@@ -10,7 +10,7 @@ ENV WDEN_BUILD_FOLDER /root/.wden-build
 COPY build "$WDEN_BUILD_FOLDER"
 
 ENV WDEN_RUN_FOLDER /root/.wden-run
-COPY run "$WDEN_BUILD_FOLDER"
+COPY run "$WDEN_RUN_FOLDER"
 
 # PYTHONIOENCODING: sys.getdefaultencoding()
 # LC_CTYPE: sys.getfilesystemencoding()
