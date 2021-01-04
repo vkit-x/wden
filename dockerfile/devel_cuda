@@ -24,4 +24,4 @@ RUN "$WDEN_BUILD_FOLDER"/devel_cuda.sh
 # install_fixuid.sh
 USER "$FIXUID_USER":"$FIXUID_GROUP"
 ENTRYPOINT ["fixuid", "-q"]
-CMD ["bash", "--init-file", "$WDEN_RUN_FOLDER/devel_cuda.sh"]
+CMD "$WDEN_RUN_FOLDER"/run_devel_cuda.sh
