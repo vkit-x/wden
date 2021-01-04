@@ -14,4 +14,4 @@ chmod 755 /.bashrc
 printf '\n%s\n' 'source /.bashrc' >> /etc/profile
 
 # Initialize direnv.
-printf '\n%s\n' 'eval "$(direnv hook zsh)"' >> /.bashrc
+printf '\n%s\n' 'eval "$(direnv hook bash)"' >> /.bashrc
