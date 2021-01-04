@@ -34,4 +34,4 @@ declare -a pkgs=(
     direnv
 )
 
-apt-get install -y ${pkgs[@]}
+apt-get install -y "${pkgs[@]}"
