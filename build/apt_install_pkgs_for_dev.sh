@@ -31,7 +31,7 @@ declare -a pkgs=(
     unzip
     p7zip-full
     git
-    zsh
+    # zsh
     direnv
 )
 
