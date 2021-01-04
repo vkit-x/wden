@@ -1,2 +1,5 @@
 #!/usr/bin/env bash
-set -e
+
+source /.bashrc
+
+eval "$(direnv hook bash)"

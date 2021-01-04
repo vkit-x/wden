@@ -9,9 +9,3 @@ mv /root/.bashrc /.bashrc
 # Grant all user the access.
 chmod -R 755 /.oh-my-bash
 chmod 755 /.bashrc
-
-# Add to global startup script.
-printf '\n%s\n' 'source /.bashrc' >> /etc/profile
-
-# Initialize direnv.
-printf '\n%s\n' 'eval "$(direnv hook bash)"' >> /.bashrc
