@@ -12,3 +12,7 @@ eval "$(direnv hook bash)"
 if [ -n "$APT_SET_MIRROR_TENCENT" ] ; then
     sudo "$WDEN_RUN_FOLDER"/apt_set_mirror_tencent.sh
 fi
+
+if [ -n "$APT_SET_MIRROR_ALIYUN" ] ; then
+    sudo "$WDEN_RUN_FOLDER"/apt_set_mirror_aliyun.sh
+fi

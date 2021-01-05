@@ -23,9 +23,6 @@ declare -a pkgs=(
     build-essential
     cmake
 
-    # Required by opencv.
-    libgl1-mesa-glx
-
     # Utility.
     zip
     unzip
