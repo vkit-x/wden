@@ -10,12 +10,12 @@ jobs:
 
     strategy:
       matrix:
-        cuda_version: [10.2, 11.1]
+        cuda_version: [10.2, 11.0.3]
         cudnn_version: [7, 8]
         ubuntu_version: [18.04]
         python_version: [3.6, 3.7, 3.8, 3.9]
         exclude:
-          - cuda_version: 11.1
+          - cuda_version: 11.0.3
             cudnn_version: 7
 
     steps:
