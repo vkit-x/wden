@@ -20,6 +20,7 @@ fi
 if [ -n "$CD_DEFAULT_FOLDER" ] ; then
     if [ -d "$CD_DEFAULT_FOLDER" ] ; then
         alias cd="HOME='${CD_DEFAULT_FOLDER}' cd"
+        cd "$CD_DEFAULT_FOLDER"
     else
         echo "WARNING: CD_DEFAULT_FOLDER=${CD_DEFAULT_FOLDER} not exists."
     fi

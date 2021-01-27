@@ -24,6 +24,8 @@ curl --silent --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | pyth
 chmod 777 /usr/local/lib/python"$PYTHON_VERSION"/dist-packages
 chmod 777 /usr/local/bin
 chmod 777 /usr/local/sbin
+# git clone from repository.
+chmod 777 /usr/src
 
 # Change the system default python/python3.
 update-alternatives --install /usr/bin/python python /usr/bin/python"$PYTHON_VERSION" 1
