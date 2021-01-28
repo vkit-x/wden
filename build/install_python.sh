@@ -24,6 +24,7 @@ curl --silent --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | pyth
 chmod 777 /usr/local/lib/python"$PYTHON_VERSION"/dist-packages
 chmod 777 /usr/local/bin
 chmod 777 /usr/local/sbin
+chmod 777 /usr/local/share/man
 # git clone from repository.
 chmod 777 /usr/src
 
