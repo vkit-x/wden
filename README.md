@@ -10,6 +10,14 @@ Switch to use [Tencent's mirror](https://mirrors.cloud.tencent.com/help/ubuntu.h
 
 Switch to use [Aliyun's mirror](https://developer.aliyun.com/mirror/ubuntu).
 
+### `PIP_SET_INDEX_TENCENT`
+
+Use Tencent's PyPI index.
+
+### `PIP_SET_INDEX_ALIYUN`
+
+Use Aliyun's PyPI index.
+
 ### `CD_DEFAULT_FOLDER`
 
 Change the `cd` default folder.
