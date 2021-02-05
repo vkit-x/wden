@@ -22,6 +22,10 @@ Use Aliyun's PyPI index.
 
 Change the `cd` default folder.
 
+### `SSH_AUTH_SOCK`
+
+If set, trigger the setup for SSH agent forwarding.
+
 ## Usage
 
 SSH agent forwarding in macOS:
