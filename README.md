@@ -28,7 +28,7 @@ If set, trigger the setup for SSH agent forwarding.
 
 ## Usage
 
-SSH agent forwarding in macOS:
+### SSH agent forwarding in macOS
 
 ```bash
 # IN THE HOST SHELL:
@@ -70,4 +70,28 @@ echo $GIT_SSH_COMMAND
 << OUTPUT
 ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
 OUTPUT
+```
+
+### SSH agent forwarding in Linux
+
+```bash
+# IN THE HOST SHELL:
+
+# Make sure ssh-agent is up.
+echo $SSH_AUTH_SOCK
+<< OUTPUT
+/tmp/ssh-adpxy7vPDaj7/agent.15833
+OUTPUT
+
+# Mount the socket file to container.
+docker run \
+  --rm -it \
+  -v "$SSH_AUTH_SOCK":/run/ssh-auth.sock:shared \
+  -e SSH_AUTH_SOCK="/run/ssh-auth.sock" \
+  --user "$(id -u):$(id -g)" \
+  wden/wden:devel-cpu-ubuntu18.04-python3.8
+
+
+# IN THE CONTAINER SHELL:
+# Same as 'SSH agent forwarding in macOS'
 ```
