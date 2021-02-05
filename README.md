@@ -21,3 +21,49 @@ Use Aliyun's PyPI index.
 ### `CD_DEFAULT_FOLDER`
 
 Change the `cd` default folder.
+
+## Usage
+
+SSH agent forwarding in macOS:
+
+```bash
+# IN THE HOST SHELL:
+
+# Store passphrases in your keychain.
+ssh-add -K /path/to/private-key-file
+
+# Add all identities stored in your keychain.
+# Make sure key identity is added before launching container.
+ssh-add -A
+
+# The option "shared" in volume change the file permission of
+# /run/ssh-auth.sock to 777 to make the file accessible by non-root user.
+docker run \
+  --rm -it \
+  -v /run/host-services/ssh-auth.sock:/run/ssh-auth.sock:shared \
+  -e SSH_AUTH_SOCK="/run/ssh-auth.sock" \
+  --user "$(id -u):$(id -g)" \
+  wden/wden:devel-cpu-ubuntu18.04-python3.8
+
+
+# IN THE CONTAINER SHELL:
+
+# Test connection (suppose you have added the github private key).
+ssh -T git@github.com
+<< OUTPUT
+Warning: Permanently added 'github.com,13.250.177.223' (RSA) to the list of known hosts.
+Hi huntzhan! You've successfully authenticated, but GitHub does not provide shell access.
+OUTPUT
+
+# ssh alias is set to bypass host checking.
+alias ssh
+<< OUTPUT
+alias ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+OUTPUT
+
+# Same to faciliate git operations.
+echo $GIT_SSH_COMMAND
+<< OUTPUT
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
+OUTPUT
+```

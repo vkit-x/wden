@@ -29,3 +29,12 @@ if [ -n "$CD_DEFAULT_FOLDER" ] ; then
         echo "WARNING: CD_DEFAULT_FOLDER=${CD_DEFAULT_FOLDER} not exists."
     fi
 fi
+
+if [ -n "$SSH_AUTH_SOCK" ] ; then
+    if [ "$(stat -c '%a' "$SSH_AUTH_SOCK")" != '777' ] ; then
+        echo "WARNING: SSH_AUTH_SOCK=$SSH_AUTH_SOCK doesn't have permission 777. Auto fixing."
+        sudo chmod 777 "$SSH_AUTH_SOCK"
+    fi
+    export GIT_SSH_COMMAND='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+    alias ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+fi
