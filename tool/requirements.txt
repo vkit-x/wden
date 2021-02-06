@@ -1,0 +1,7 @@
+markdown-toc
+pyyaml
+fireball
+iolite
+yapf
+flake8
+ipython

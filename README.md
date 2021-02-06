@@ -1,10 +1,132 @@
+
+# Table of Contents
+* [Overview](#Overview)
+* [Images](#Images)
+* [Usage](#Usage)
+	* [UID/GID forwarding](#UID/GID-forwarding)
+	* [Change the default `cd` folder](#Change-the-default-`cd`-folder)
+	* [SSH agent forwarding in macOS](#SSH-agent-forwarding-in-macOS)
+	* [SSH agent forwarding in Linux](#SSH-agent-forwarding-in-Linux)
+	* [Git config forwarding](#Git-config-forwarding)
+	* [Switch to APT mirror sites in China](#Switch-to-APT-mirror-sites-in-China)
+	* [Use PyPI mirror sites in China](#Use-PyPI-mirror-sites-in-China)
+
+
 ## Overview
 
-TODO
+wden project attempts to provide the best practices to use docker container as development environment for researcher and algorithm engineer.
 
 ## Images
 
-TODO
+Supported constructs are as followed:
+
+
+| Construct | `docker pull` ommand |
+| --------- | -------------------- |
+| CUDA=10.1, CUDNN=7, PYTHON=3.6, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.6` |
+| CUDA=10.1, CUDNN=7, PYTHON=3.7, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.7` |
+| CUDA=10.1, CUDNN=7, PYTHON=3.8, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.8` |
+| CUDA=10.1, CUDNN=7, PYTHON=3.9, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.9` |
+| CUDA=10.1, CUDNN=8, PYTHON=3.6, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.1-cudnn8-ubuntu18.04-python3.6` |
+| CUDA=10.1, CUDNN=8, PYTHON=3.7, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.1-cudnn8-ubuntu18.04-python3.7` |
+| CUDA=10.1, CUDNN=8, PYTHON=3.8, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.1-cudnn8-ubuntu18.04-python3.8` |
+| CUDA=10.1, CUDNN=8, PYTHON=3.9, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.1-cudnn8-ubuntu18.04-python3.9` |
+| CUDA=10.2, CUDNN=7, PYTHON=3.6, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.2-cudnn7-ubuntu18.04-python3.6` |
+| CUDA=10.2, CUDNN=7, PYTHON=3.7, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.2-cudnn7-ubuntu18.04-python3.7` |
+| CUDA=10.2, CUDNN=7, PYTHON=3.8, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.2-cudnn7-ubuntu18.04-python3.8` |
+| CUDA=10.2, CUDNN=7, PYTHON=3.9, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.2-cudnn7-ubuntu18.04-python3.9` |
+| CUDA=10.2, CUDNN=8, PYTHON=3.6, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.2-cudnn8-ubuntu18.04-python3.6` |
+| CUDA=10.2, CUDNN=8, PYTHON=3.7, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.2-cudnn8-ubuntu18.04-python3.7` |
+| CUDA=10.2, CUDNN=8, PYTHON=3.8, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.2-cudnn8-ubuntu18.04-python3.8` |
+| CUDA=10.2, CUDNN=8, PYTHON=3.9, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.2-cudnn8-ubuntu18.04-python3.9` |
+| CUDA=11.0.3, CUDNN=8, PYTHON=3.6, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda11.0.3-cudnn8-ubuntu18.04-python3.6` |
+| CUDA=11.0.3, CUDNN=8, PYTHON=3.7, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda11.0.3-cudnn8-ubuntu18.04-python3.7` |
+| CUDA=11.0.3, CUDNN=8, PYTHON=3.8, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda11.0.3-cudnn8-ubuntu18.04-python3.8` |
+| CUDA=11.0.3, CUDNN=8, PYTHON=3.9, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda11.0.3-cudnn8-ubuntu18.04-python3.9` |
+| CUDA=9.2, CUDNN=7, PYTHON=3.6, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda9.2-cudnn7-ubuntu18.04-python3.6` |
+| CUDA=9.2, CUDNN=7, PYTHON=3.7, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda9.2-cudnn7-ubuntu18.04-python3.7` |
+| CUDA=9.2, CUDNN=7, PYTHON=3.8, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda9.2-cudnn7-ubuntu18.04-python3.8` |
+| CUDA=9.2, CUDNN=7, PYTHON=3.9, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda9.2-cudnn7-ubuntu18.04-python3.9` |
+| CUDA=10.1, CUDNN=7, PYTHON=3.6, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.6` |
+| CUDA=10.1, CUDNN=7, PYTHON=3.7, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.7` |
+| CUDA=10.1, CUDNN=7, PYTHON=3.8, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.8` |
+| CUDA=10.1, CUDNN=7, PYTHON=3.9, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.9` |
+| CUDA=10.1, CUDNN=8, PYTHON=3.6, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.1-cudnn8-ubuntu18.04-python3.6` |
+| CUDA=10.1, CUDNN=8, PYTHON=3.7, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.1-cudnn8-ubuntu18.04-python3.7` |
+| CUDA=10.1, CUDNN=8, PYTHON=3.8, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.1-cudnn8-ubuntu18.04-python3.8` |
+| CUDA=10.1, CUDNN=8, PYTHON=3.9, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.1-cudnn8-ubuntu18.04-python3.9` |
+| CUDA=10.2, CUDNN=7, PYTHON=3.6, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.2-cudnn7-ubuntu18.04-python3.6` |
+| CUDA=10.2, CUDNN=7, PYTHON=3.7, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.2-cudnn7-ubuntu18.04-python3.7` |
+| CUDA=10.2, CUDNN=7, PYTHON=3.8, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.2-cudnn7-ubuntu18.04-python3.8` |
+| CUDA=10.2, CUDNN=7, PYTHON=3.9, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.2-cudnn7-ubuntu18.04-python3.9` |
+| CUDA=10.2, CUDNN=8, PYTHON=3.6, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.2-cudnn8-ubuntu18.04-python3.6` |
+| CUDA=10.2, CUDNN=8, PYTHON=3.7, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.2-cudnn8-ubuntu18.04-python3.7` |
+| CUDA=10.2, CUDNN=8, PYTHON=3.8, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.2-cudnn8-ubuntu18.04-python3.8` |
+| CUDA=10.2, CUDNN=8, PYTHON=3.9, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.2-cudnn8-ubuntu18.04-python3.9` |
+| CUDA=11.0.3, CUDNN=8, PYTHON=3.6, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda11.0.3-cudnn8-ubuntu18.04-python3.6` |
+| CUDA=11.0.3, CUDNN=8, PYTHON=3.7, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda11.0.3-cudnn8-ubuntu18.04-python3.7` |
+| CUDA=11.0.3, CUDNN=8, PYTHON=3.8, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda11.0.3-cudnn8-ubuntu18.04-python3.8` |
+| CUDA=11.0.3, CUDNN=8, PYTHON=3.9, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda11.0.3-cudnn8-ubuntu18.04-python3.9` |
+| CUDA=9.2, CUDNN=7, PYTHON=3.6, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda9.2-cudnn7-ubuntu18.04-python3.6` |
+| CUDA=9.2, CUDNN=7, PYTHON=3.7, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda9.2-cudnn7-ubuntu18.04-python3.7` |
+| CUDA=9.2, CUDNN=7, PYTHON=3.8, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda9.2-cudnn7-ubuntu18.04-python3.8` |
+| CUDA=9.2, CUDNN=7, PYTHON=3.9, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda9.2-cudnn7-ubuntu18.04-python3.9` |
+
+
+As a known issue, pulling from docker hub is intolerably slow for users in China. To speed up, images are also hosted in Huawei Cloud:
+
+
+| Construct | `docker pull` ommand |
+| --------- | -------------------- |
+| CUDA=10.1, CUDNN=7, PYTHON=3.6, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.6` |
+| CUDA=10.1, CUDNN=7, PYTHON=3.7, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.7` |
+| CUDA=10.1, CUDNN=7, PYTHON=3.8, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.8` |
+| CUDA=10.1, CUDNN=7, PYTHON=3.9, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.9` |
+| CUDA=10.1, CUDNN=8, PYTHON=3.6, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.1-cudnn8-ubuntu18.04-python3.6` |
+| CUDA=10.1, CUDNN=8, PYTHON=3.7, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.1-cudnn8-ubuntu18.04-python3.7` |
+| CUDA=10.1, CUDNN=8, PYTHON=3.8, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.1-cudnn8-ubuntu18.04-python3.8` |
+| CUDA=10.1, CUDNN=8, PYTHON=3.9, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.1-cudnn8-ubuntu18.04-python3.9` |
+| CUDA=10.2, CUDNN=7, PYTHON=3.6, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.2-cudnn7-ubuntu18.04-python3.6` |
+| CUDA=10.2, CUDNN=7, PYTHON=3.7, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.2-cudnn7-ubuntu18.04-python3.7` |
+| CUDA=10.2, CUDNN=7, PYTHON=3.8, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.2-cudnn7-ubuntu18.04-python3.8` |
+| CUDA=10.2, CUDNN=7, PYTHON=3.9, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.2-cudnn7-ubuntu18.04-python3.9` |
+| CUDA=10.2, CUDNN=8, PYTHON=3.6, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.2-cudnn8-ubuntu18.04-python3.6` |
+| CUDA=10.2, CUDNN=8, PYTHON=3.7, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.2-cudnn8-ubuntu18.04-python3.7` |
+| CUDA=10.2, CUDNN=8, PYTHON=3.8, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.2-cudnn8-ubuntu18.04-python3.8` |
+| CUDA=10.2, CUDNN=8, PYTHON=3.9, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.2-cudnn8-ubuntu18.04-python3.9` |
+| CUDA=11.0.3, CUDNN=8, PYTHON=3.6, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.0.3-cudnn8-ubuntu18.04-python3.6` |
+| CUDA=11.0.3, CUDNN=8, PYTHON=3.7, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.0.3-cudnn8-ubuntu18.04-python3.7` |
+| CUDA=11.0.3, CUDNN=8, PYTHON=3.8, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.0.3-cudnn8-ubuntu18.04-python3.8` |
+| CUDA=11.0.3, CUDNN=8, PYTHON=3.9, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.0.3-cudnn8-ubuntu18.04-python3.9` |
+| CUDA=9.2, CUDNN=7, PYTHON=3.6, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda9.2-cudnn7-ubuntu18.04-python3.6` |
+| CUDA=9.2, CUDNN=7, PYTHON=3.7, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda9.2-cudnn7-ubuntu18.04-python3.7` |
+| CUDA=9.2, CUDNN=7, PYTHON=3.8, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda9.2-cudnn7-ubuntu18.04-python3.8` |
+| CUDA=9.2, CUDNN=7, PYTHON=3.9, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda9.2-cudnn7-ubuntu18.04-python3.9` |
+| CUDA=10.1, CUDNN=7, PYTHON=3.6, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.6` |
+| CUDA=10.1, CUDNN=7, PYTHON=3.7, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.7` |
+| CUDA=10.1, CUDNN=7, PYTHON=3.8, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.8` |
+| CUDA=10.1, CUDNN=7, PYTHON=3.9, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.9` |
+| CUDA=10.1, CUDNN=8, PYTHON=3.6, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.1-cudnn8-ubuntu18.04-python3.6` |
+| CUDA=10.1, CUDNN=8, PYTHON=3.7, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.1-cudnn8-ubuntu18.04-python3.7` |
+| CUDA=10.1, CUDNN=8, PYTHON=3.8, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.1-cudnn8-ubuntu18.04-python3.8` |
+| CUDA=10.1, CUDNN=8, PYTHON=3.9, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.1-cudnn8-ubuntu18.04-python3.9` |
+| CUDA=10.2, CUDNN=7, PYTHON=3.6, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.2-cudnn7-ubuntu18.04-python3.6` |
+| CUDA=10.2, CUDNN=7, PYTHON=3.7, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.2-cudnn7-ubuntu18.04-python3.7` |
+| CUDA=10.2, CUDNN=7, PYTHON=3.8, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.2-cudnn7-ubuntu18.04-python3.8` |
+| CUDA=10.2, CUDNN=7, PYTHON=3.9, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.2-cudnn7-ubuntu18.04-python3.9` |
+| CUDA=10.2, CUDNN=8, PYTHON=3.6, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.2-cudnn8-ubuntu18.04-python3.6` |
+| CUDA=10.2, CUDNN=8, PYTHON=3.7, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.2-cudnn8-ubuntu18.04-python3.7` |
+| CUDA=10.2, CUDNN=8, PYTHON=3.8, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.2-cudnn8-ubuntu18.04-python3.8` |
+| CUDA=10.2, CUDNN=8, PYTHON=3.9, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.2-cudnn8-ubuntu18.04-python3.9` |
+| CUDA=11.0.3, CUDNN=8, PYTHON=3.6, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.0.3-cudnn8-ubuntu18.04-python3.6` |
+| CUDA=11.0.3, CUDNN=8, PYTHON=3.7, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.0.3-cudnn8-ubuntu18.04-python3.7` |
+| CUDA=11.0.3, CUDNN=8, PYTHON=3.8, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.0.3-cudnn8-ubuntu18.04-python3.8` |
+| CUDA=11.0.3, CUDNN=8, PYTHON=3.9, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.0.3-cudnn8-ubuntu18.04-python3.9` |
+| CUDA=9.2, CUDNN=7, PYTHON=3.6, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda9.2-cudnn7-ubuntu18.04-python3.6` |
+| CUDA=9.2, CUDNN=7, PYTHON=3.7, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda9.2-cudnn7-ubuntu18.04-python3.7` |
+| CUDA=9.2, CUDNN=7, PYTHON=3.8, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda9.2-cudnn7-ubuntu18.04-python3.8` |
+| CUDA=9.2, CUDNN=7, PYTHON=3.9, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda9.2-cudnn7-ubuntu18.04-python3.9` |
+
 
 ## Usage
 
