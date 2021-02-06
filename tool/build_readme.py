@@ -96,7 +96,7 @@ def build(readme_md, main_yml, output):
             '| Construct | `docker pull` ommand |',
             '| --------- | -------------------- |',
         ]
-        for tag, cb in itertools.chain(gpu_tag_cb, gpu_tag_cb):
+        for tag, cb in itertools.chain(gpu_tag_cb, cpu_tag_cb):
             bases = []
             for key in sorted(cb):
                 val = cb[key]
