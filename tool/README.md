@@ -6,9 +6,13 @@ wden project attempts to provide the best practices to use docker container as d
 
 ## Images
 
+### Hosted in Docker Hub
+
 Supported constructs are as followed:
 
 [TABLE_DOCKER_HUB]
+
+### Hosted in Huawei Cloud
 
 As a known issue, pulling from docker hub is intolerably slow for users in China. To speed up, images are also hosted in Huawei Cloud:
 

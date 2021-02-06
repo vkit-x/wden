@@ -2,6 +2,8 @@
 # Table of Contents
 * [Overview](#Overview)
 * [Images](#Images)
+	* [Hosted in Docker Hub](#Hosted-in-Docker-Hub)
+	* [Hosted in Huawei Cloud](#Hosted-in-Huawei-Cloud)
 * [Usage](#Usage)
 	* [UID/GID forwarding](#UID/GID-forwarding)
 	* [Change the default `cd` folder](#Change-the-default-`cd`-folder)
@@ -17,6 +19,8 @@
 wden project attempts to provide the best practices to use docker container as development environment for researcher and algorithm engineer.
 
 ## Images
+
+### Hosted in Docker Hub
 
 Supported constructs are as followed:
 
@@ -72,6 +76,8 @@ Supported constructs are as followed:
 | CUDA=9.2, CUDNN=7, PYTHON=3.8, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda9.2-cudnn7-ubuntu18.04-python3.8` |
 | CUDA=9.2, CUDNN=7, PYTHON=3.9, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda9.2-cudnn7-ubuntu18.04-python3.9` |
 
+
+### Hosted in Huawei Cloud
 
 As a known issue, pulling from docker hub is intolerably slow for users in China. To speed up, images are also hosted in Huawei Cloud:
 
