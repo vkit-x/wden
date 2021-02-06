@@ -1,30 +1,10 @@
+## Overview
 
+TODO
 
-## Docker run environments
+## Images
 
-### `APT_SET_MIRROR_TENCENT`
-
-Switch to use [Tencent's mirror](https://mirrors.cloud.tencent.com/help/ubuntu.html).
-
-### `APT_SET_MIRROR_ALIYUN`
-
-Switch to use [Aliyun's mirror](https://developer.aliyun.com/mirror/ubuntu).
-
-### `PIP_SET_INDEX_TENCENT`
-
-Use Tencent's PyPI index.
-
-### `PIP_SET_INDEX_ALIYUN`
-
-Use Aliyun's PyPI index.
-
-### `CD_DEFAULT_FOLDER`
-
-Change the `cd` default folder.
-
-### `SSH_AUTH_SOCK`
-
-If set, trigger the setup for SSH agent forwarding.
+TODO
 
 ## Usage
 
@@ -83,6 +63,36 @@ ls -l | grep foobar
 OUTPUT
 ```
 
+### Change the default `cd` folder
+
+Envs:
+
+* `CD_DEFAULT_FOLDER` : If set, initialize the shell and change the `cd` default folder to this path.
+
+```bash
+#####################
+# IN THE HOST SHELL #
+#####################
+docker run \
+  --rm -it \
+  -e CD_DEFAULT_FOLDER=/data \
+  -v "$(pwd)":/data \
+  wden/wden:devel-cpu-ubuntu18.04-python3.8
+
+##########################
+# IN THE CONTAINER SHELL #
+##########################
+pwd
+<< OUTPUT
+/data
+OUTPUT
+
+alias cd
+<< OUTPUT
+alias cd='HOME='\''/data'\'' cd'
+OUTPUT
+```
+
 ### SSH agent forwarding in macOS
 
 ```bash
@@ -96,8 +106,9 @@ ssh-add -K /path/to/private-key-file
 # Make sure key identity is added before launching container.
 ssh-add -A
 
-# The option "shared" in volume change the file permission of
+# 1. The option "shared" in volume change the file permission of
 # /run/ssh-auth.sock to 777 to make the file accessible by non-root user.
+# 2. If SSH_AUTH_SOCK is set, the setup for SSH agent forwarding will be triggered.
 docker run \
   --rm -it \
   -v /run/host-services/ssh-auth.sock:/run/ssh-auth.sock:shared \
@@ -175,3 +186,59 @@ user.email=huntzhan.dev@gmail.com
 credential.helper=osxkeychain
 OUTPUT
 ```
+
+### Switch to APT mirror sites in China
+
+Envs:
+
+* `APT_SET_MIRROR_TENCENT` : If set, switch to use [Tencent's mirror](https://mirrors.cloud.tencent.com/help/ubuntu.html).
+* `APT_SET_MIRROR_ALIYUN` : If set, switch to use [Aliyun's mirror](https://developer.aliyun.com/mirror/ubuntu).
+
+```bash
+#####################
+# IN THE HOST SHELL #
+#####################
+docker run \
+  --rm -it \
+  -e APT_SET_MIRROR_TENCENT=1 \
+  wden/wden:devel-cpu-ubuntu18.04-python3.8
+
+##########################
+# IN THE CONTAINER SHELL #
+##########################
+<< OUTPUT
+Run apt_set_mirror_tencent.sh
+Get:1 http://mirrors.cloud.tencent.com/ubuntu bionic InRelease [242 kB]
+Get:2 http://mirrors.cloud.tencent.com/ubuntu bionic-security InRelease [88.7 kB]
+Hit:3 http://ppa.launchpad.net/deadsnakes/ppa/ubuntu bionic InRelease
+Get:4 http://mirrors.cloud.tencent.com/ubuntu bionic-updates InRelease [88.7 kB]
+Get:5 http://mirrors.cloud.tencent.com/ubuntu bionic/universe Sources [11.5 MB]
+...
+OUTPUT
+```
+
+### Use PyPI mirror sites in China
+
+Envs:
+
+* `PIP_SET_INDEX_TENCENT`: Use Tencent's PyPI index.
+* `PIP_SET_INDEX_ALIYUN` : Use Aliyun's PyPI index.
+
+```bash
+#####################
+# IN THE HOST SHELL #
+#####################
+docker run \
+  --rm -it \
+  -e PIP_SET_INDEX_TENCENT=1 \
+  wden/wden:devel-cpu-ubuntu18.04-python3.8
+
+##########################
+# IN THE CONTAINER SHELL #
+##########################
+echo $PIP_INDEX_URL
+<< OUTPUT
+https://mirrors.cloud.tencent.com/pypi/simple/
+OUTPUT
+```
+
