@@ -6,7 +6,7 @@
 	* [Hosted in Huawei Cloud](#Hosted-in-Huawei-Cloud)
 * [Usage](#Usage)
 	* [UID/GID forwarding](#UID/GID-forwarding)
-	* [Change the default `cd` folder](#Change-the-default-`cd`-folder)
+	* [Change the default cd folder](#Change-the-default-cd-folder)
 	* [SSH agent forwarding in macOS](#SSH-agent-forwarding-in-macOS)
 	* [SSH agent forwarding in Linux](#SSH-agent-forwarding-in-Linux)
 	* [Git config forwarding](#Git-config-forwarding)
@@ -191,7 +191,7 @@ ls -l | grep foobar
 OUTPUT
 ```
 
-### Change the default `cd` folder
+### Change the default cd folder
 
 Envs:
 

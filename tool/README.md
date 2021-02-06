@@ -75,7 +75,7 @@ ls -l | grep foobar
 OUTPUT
 ```
 
-### Change the default `cd` folder
+### Change the default cd folder
 
 Envs:
 
