@@ -20,7 +20,7 @@ As a known issue, pulling from docker hub is intolerably slow for users in China
 
 ## Usage
 
-### UID/GID forwarding
+### UID and GID forwarding
 
 ```bash
 #####################
@@ -254,3 +254,25 @@ https://mirrors.cloud.tencent.com/pypi/simple/
 OUTPUT
 ```
 
+### Bash history forwarding
+
+```bash
+#####################
+# IN THE HOST SHELL #
+#####################
+# "$HOME"/.bash_history will be forwarded to and changed by the container.
+# https://ss64.com/bash/history.html
+docker run \
+  --rm -it \
+  -v "$HOME"/.bash_history:/run/.bash_history:rw \
+  -e HISTFILE=/run/.bash_history \
+  wden/wden:devel-cpu-ubuntu18.04-python3.8
+
+##########################
+# IN THE CONTAINER SHELL #
+##########################
+history
+<< OUTPUT
+<Same bash history as host>
+OUTPUT
+```

@@ -38,3 +38,6 @@ if [ -n "$SSH_AUTH_SOCK" ] ; then
     export GIT_SSH_COMMAND='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
     alias ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 fi
+
+# Sync terminal session command history.
+export PROMPT_COMMAND="history -a; history -n"

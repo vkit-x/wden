@@ -5,13 +5,14 @@
 	* [Hosted in Docker Hub](#Hosted-in-Docker-Hub)
 	* [Hosted in Huawei Cloud](#Hosted-in-Huawei-Cloud)
 * [Usage](#Usage)
-	* [UID/GID forwarding](#UID/GID-forwarding)
+	* [UID and GID forwarding](#UID-and-GID-forwarding)
 	* [Change the default cd folder](#Change-the-default-cd-folder)
 	* [SSH agent forwarding in macOS](#SSH-agent-forwarding-in-macOS)
 	* [SSH agent forwarding in Linux](#SSH-agent-forwarding-in-Linux)
 	* [Git config forwarding](#Git-config-forwarding)
 	* [Switch to APT mirror sites in China](#Switch-to-APT-mirror-sites-in-China)
 	* [Use PyPI mirror sites in China](#Use-PyPI-mirror-sites-in-China)
+	* [Bash history forwarding](#Bash-history-forwarding)
 
 
 ## Overview
@@ -136,7 +137,7 @@ As a known issue, pulling from docker hub is intolerably slow for users in China
 
 ## Usage
 
-### UID/GID forwarding
+### UID and GID forwarding
 
 ```bash
 #####################
@@ -370,3 +371,25 @@ https://mirrors.cloud.tencent.com/pypi/simple/
 OUTPUT
 ```
 
+### Bash history forwarding
+
+```bash
+#####################
+# IN THE HOST SHELL #
+#####################
+# "$HOME"/.bash_history will be forwarded to and changed by the container.
+# https://ss64.com/bash/history.html
+docker run \
+  --rm -it \
+  -v "$HOME"/.bash_history:/run/.bash_history:rw \
+  -e HISTFILE=/run/.bash_history \
+  wden/wden:devel-cpu-ubuntu18.04-python3.8
+
+##########################
+# IN THE CONTAINER SHELL #
+##########################
+history
+<< OUTPUT
+<Same bash history as host>
+OUTPUT
+```
