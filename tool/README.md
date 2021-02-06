@@ -144,7 +144,7 @@ alias ssh
 alias ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 OUTPUT
 
-# Same to faciliate git operations.
+# Same here, to faciliate git operations.
 echo $GIT_SSH_COMMAND
 << OUTPUT
 ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no

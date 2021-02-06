@@ -93,7 +93,7 @@ def build(readme_md, main_yml, output):
 
     def build_table(registry_prefix):
         table = [
-            '| Construct | `docker pull` ommand |',
+            '| Construct | `docker pull` command |',
             '| --------- | -------------------- |',
         ]
         for tag, cb in itertools.chain(gpu_tag_cb, cpu_tag_cb):

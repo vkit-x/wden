@@ -26,7 +26,7 @@ wden project attempts to provide the best practices to use docker container as d
 Supported constructs are as followed:
 
 
-| Construct | `docker pull` ommand |
+| Construct | `docker pull` command |
 | --------- | -------------------- |
 | CUDA=10.1, CUDNN=7, PYTHON=3.6, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.6` |
 | CUDA=10.1, CUDNN=7, PYTHON=3.7, UBUNTU=18.04 | `docker pull wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.7` |
@@ -63,7 +63,7 @@ Supported constructs are as followed:
 As a known issue, pulling from docker hub is intolerably slow for users in China. To speed up, images are also hosted in Huawei Cloud:
 
 
-| Construct | `docker pull` ommand |
+| Construct | `docker pull` command |
 | --------- | -------------------- |
 | CUDA=10.1, CUDNN=7, PYTHON=3.6, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.6` |
 | CUDA=10.1, CUDNN=7, PYTHON=3.7, UBUNTU=18.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda10.1-cudnn7-ubuntu18.04-python3.7` |
@@ -221,7 +221,7 @@ alias ssh
 alias ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 OUTPUT
 
-# Same to faciliate git operations.
+# Same here, to faciliate git operations.
 echo $GIT_SSH_COMMAND
 << OUTPUT
 ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
