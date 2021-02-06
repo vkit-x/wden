@@ -8,7 +8,7 @@ on:
     paths-ignore:
       - 'README.md'
       - '.*'
-      - 'tool/'
+      - 'tool/**'
 
 jobs:
   build-cuda:
