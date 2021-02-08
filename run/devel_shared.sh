@@ -40,4 +40,4 @@ if [ -n "$SSH_AUTH_SOCK" ] ; then
 fi
 
 # Sync terminal session command history.
-export PROMPT_COMMAND="history -a; history -n"
+# export PROMPT_COMMAND="history -a; history -n"
