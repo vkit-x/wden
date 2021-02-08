@@ -10,7 +10,7 @@ adduser \
     --uid 1000 \
     --ingroup "$FIXUID_GROUP" \
     --home /home/"$FIXUID_USER" \
-    --shell /bin/zsh \
+    --shell /bin/bash \
     --disabled-password \
     --gecos "" \
     "$FIXUID_USER"
