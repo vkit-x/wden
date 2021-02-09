@@ -4,6 +4,12 @@ set -e
 add-apt-repository ppa:deadsnakes/ppa -y
 apt-get update
 
+# Patch Ubuntu 18.04 executables related to python3.
+SYSTEM_DEFAULT_PYTHON_VERSION=$(python3 -c 'import sys; print(sys.version[:3])')
+echo "SYSTEM_DEFAULT_PYTHON_VERSION=${SYSTEM_DEFAULT_PYTHON_VERSION}"
+grep -rl '#!/usr/bin/python3' /usr/bin \
+    | xargs sed -i "s|#!/usr/bin/python3|#!/usr/bin/python${SYSTEM_DEFAULT_PYTHON_VERSION}|g"
+
 echo "Install PYTHON_VERSION=${PYTHON_VERSION}"
 
 # Required for building python.
