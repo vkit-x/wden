@@ -19,12 +19,15 @@ apt-get install --ignore-missing -y python3-distutils || true
 # Suppress tzdata interactive prompt shipped with Python 3.9.
 export DEBIAN_FRONTEND="noninteractive"
 
+# Install Python.
 apt-get install -y \
     python"$PYTHON_VERSION" \
     python"$PYTHON_VERSION"-dev \
     python"$PYTHON_VERSION"-venv
 
+# Install the latest version of pip.
 curl --silent --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | python"$PYTHON_VERSION"
+/usr/local/bin/pip"$PYTHON_VERSION" install -U pip
 
 # Allow non-root user to install package.
 chmod -R 777 /usr/lib/python"$PYTHON_VERSION"
