@@ -9,6 +9,7 @@
 	* [Change the default cd folder](#Change-the-default-cd-folder)
 	* [SSH agent forwarding in macOS](#SSH-agent-forwarding-in-macOS)
 	* [SSH agent forwarding in Linux](#SSH-agent-forwarding-in-Linux)
+	* [SSH proxy](#SSH-proxy)
 	* [Git config forwarding](#Git-config-forwarding)
 	* [Switch to APT mirror sites in China](#Switch-to-APT-mirror-sites-in-China)
 	* [Use PyPI mirror sites in China](#Use-PyPI-mirror-sites-in-China)
@@ -252,6 +253,46 @@ docker run \
 # IN THE CONTAINER SHELL #
 ##########################
 # Same as 'SSH agent forwarding in macOS'
+```
+
+### SSH proxy
+
+Envs:
+
+* `SSH_SOCKS5_PROXY`: Should be formatted as `<host>:<port>`. If set, use such socks5 proxy in ssh connection.
+
+```bash
+#####################
+# IN THE HOST SHELL #
+#####################
+# NOTE:
+# 1. SSH_AUTH_SOCK is not necessary.
+# 2. `host.docker.internal` refers to the hostname of the macOS host.
+docker run \
+  --rm -it \
+  -v /run/host-services/ssh-auth.sock:/run/ssh-auth.sock:shared \
+  -e SSH_AUTH_SOCK="/run/ssh-auth.sock" \
+  -e SSH_SOCKS5_PROXY="host.docker.internal:1089" \
+  wden/wden:devel-cpu-ubuntu18.04-python3.8
+
+##########################
+# IN THE CONTAINER SHELL #
+##########################
+alias ssh
+<< OUTPUT
+alias ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ProxyCommand='\''ncat --proxy-type socks5 --proxy host.docker.internal:1089 %h %p'\'''
+OUTPUT
+
+echo $GIT_SSH_COMMAND
+<< OUTPUT
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ProxyCommand='ncat --proxy-type socks5 --proxy host.docker.internal:1089 %h %p'
+OUTPUT
+
+ssh -T git@github.com
+<< OUTPUT
+Warning: Permanently added 'github.com' (RSA) to the list of known hosts.
+Hi huntzhan! You've successfully authenticated, but GitHub does not provide shell access.
+OUTPUT
 ```
 
 ### Git config forwarding
