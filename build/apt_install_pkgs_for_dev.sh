@@ -10,6 +10,9 @@ declare -a pkgs=(
     curl
     wget
 
+    # ncat for ssh proxy.
+    nmap
+
     # Editor
     vim
     neovim

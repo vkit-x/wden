@@ -177,6 +177,16 @@ docker run \
 # Same as 'SSH agent forwarding in macOS'
 ```
 
+### SSH proxy
+
+Envs:
+
+* `SSH_SOCKS5_PROXY`: Should be formatted as `<host>:<port>`. If set, use such socks5 proxy in ssh connection.
+
+```bash
+TODO
+```
+
 ### Git config forwarding
 
 ```bash

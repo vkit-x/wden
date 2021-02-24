@@ -35,6 +35,12 @@ if [ -n "$SSH_AUTH_SOCK" ] ; then
         echo "WARNING: SSH_AUTH_SOCK=$SSH_AUTH_SOCK doesn't have permission 777. Auto fixing."
         sudo chmod 777 "$SSH_AUTH_SOCK"
     fi
-    export GIT_SSH_COMMAND='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-    alias ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+    export SSH_OPTIONS='-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 fi
+
+if [ -n "$SSH_SOCKS5_PROXY" ] ; then
+    export SSH_OPTIONS="${SSH_OPTIONS} -o ProxyCommand='ncat --proxy-type socks5 --proxy ${SSH_SOCKS5_PROXY} %h %p'"
+fi
+
+export GIT_SSH_COMMAND="ssh ${SSH_OPTIONS}"
+alias ssh="ssh ${SSH_OPTIONS}"
