@@ -17,18 +17,19 @@ jobs:
     strategy:
       matrix:
         # Follows the pytorch supported CUDA versions.
-        cuda_version: [9.2, 10.1, 10.2, 11.0.3]
-        cudnn_version: [7, 8]
-        ubuntu_version: [18.04]
-        python_version: [3.6, 3.7, 3.8, 3.9]
+        cuda_version: ['9.2', '10.1', '10.2', '11.0.3', '11.1.1']
+        cudnn_version: ['7', '8']
+        ubuntu_version: ['18.04']
+        python_version: ['3.6', '3.7', '3.8', '3.9', '3.10']
         exclude:
           # CUDA 9 doesn't support CUDNN 8.
-          - cuda_version: 9.2
-            cudnn_version: 8
+          - cuda_version: '9.2'
+            cudnn_version: '8'
           # CUDA 11 doesn't support CUDNN 7.
-          - cuda_version: 11.0.3
-            cudnn_version: 7
-
+          - cuda_version: '11.0.3'
+            cudnn_version: '7'
+          - cuda_version: '11.1.1'
+            cudnn_version: '7'
     steps:
       - uses: actions/checkout@v2
 
@@ -61,8 +62,8 @@ jobs:
 
     strategy:
       matrix:
-        ubuntu_version: [18.04]
-        python_version: [3.6, 3.7, 3.8, 3.9]
+        ubuntu_version: ['18.04']
+        python_version: ['3.6', '3.7', '3.8', '3.9', '3.10']
 
     steps:
       - uses: actions/checkout@v2
