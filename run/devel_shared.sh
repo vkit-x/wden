@@ -1,5 +1,25 @@
 #!/usr/bin/env bash
 
+function patch_file_permission {
+    FILE=$1
+    OCTAL_PERMISSIONS=$2
+    CUR_OCTAL_PERMISSIONS=$(stat -c '%a' "$FILE")
+    if [ "$CUR_OCTAL_PERMISSIONS" != "$OCTAL_PERMISSIONS" ] ; then
+        echo "WARNING: Patching the permissions of FILE=${FILE}" \
+             "${CUR_OCTAL_PERMISSIONS} => ${OCTAL_PERMISSIONS}"
+        sudo chmod "$OCTAL_PERMISSIONS" "$FILE"
+    fi
+}
+
+# Patch device permissions in privileged mode.
+patch_file_permission /dev/console '620'
+patch_file_permission /dev/full '666'
+patch_file_permission /dev/null '666'
+patch_file_permission /dev/random '666'
+patch_file_permission /dev/tty '666'
+patch_file_permission /dev/urandom '666'
+patch_file_permission /dev/zero '666'
+
 # Load oh-my-bash.
 export DISABLE_UPDATE_PROMPT=true
 export DISABLE_AUTO_UPDATE=true
@@ -31,26 +51,6 @@ if [ -n "$CD_DEFAULT_FOLDER" ] ; then
         echo "WARNING: CD_DEFAULT_FOLDER=${CD_DEFAULT_FOLDER} not exists."
     fi
 fi
-
-function patch_file_permission {
-    FILE=$1
-    OCTAL_PERMISSIONS=$2
-    CUR_OCTAL_PERMISSIONS=$(stat -c '%a' "$FILE")
-    if [ "$CUR_OCTAL_PERMISSIONS" != "$OCTAL_PERMISSIONS" ] ; then
-        echo "WARNING: Patching the permissions of FILE=${FILE}" \
-             "${CUR_OCTAL_PERMISSIONS} => ${OCTAL_PERMISSIONS}"
-        sudo chmod "$OCTAL_PERMISSIONS" "$FILE"
-    fi
-}
-
-# Patch device permissions in privileged mode.
-patch_file_permission /dev/console '620'
-patch_file_permission /dev/full '666'
-patch_file_permission /dev/null '666'
-patch_file_permission /dev/random '666'
-patch_file_permission /dev/tty '666'
-patch_file_permission /dev/urandom '666'
-patch_file_permission /dev/zero '666'
 
 # SSH agent.
 if [ -n "$SSH_AUTH_SOCK" ] ; then
