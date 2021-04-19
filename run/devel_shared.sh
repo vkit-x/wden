@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -euo pipefail
+trap "echo 'error: Script failed: see failed command above'" ERR
 
 # Load oh-my-bash.
 export DISABLE_UPDATE_PROMPT=true

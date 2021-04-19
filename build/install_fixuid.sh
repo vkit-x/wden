@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
+trap "echo 'error: Script failed: see failed command above'" ERR
 
 #https://github.com/boxboat/fixuid
 addgroup \

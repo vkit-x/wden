@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
+trap "echo 'error: Script failed: see failed command above'" ERR
 
 cd /etc/apt/sources.list.d/
 mv cuda.list cuda.list.disabled || true

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -euo pipefail
+trap "echo 'error: Script failed: see failed command above'" ERR
 
 echo "Run apt_set_mirror_tencent.sh"
 
