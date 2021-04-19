@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 # Load oh-my-bash.
 export DISABLE_UPDATE_PROMPT=true
