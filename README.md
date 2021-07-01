@@ -15,7 +15,6 @@
 	* [Use PyPI mirror sites in China](#Use-PyPI-mirror-sites-in-China)
 	* [Bash history forwarding](#Bash-history-forwarding)
 
-
 ## Overview
 
 wden project attempts to provide the best practices to use docker container as development environment for researcher and algorithm engineer.
