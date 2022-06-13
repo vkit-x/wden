@@ -17,9 +17,6 @@ echo "Install PYTHON_VERSION=${PYTHON_VERSION}"
 # Ubuntu 16.04 doesn't contain python3-distutils, and it's ok to ignore.
 apt-get install --ignore-missing -y python3-distutils || true
 
-# Suppress tzdata interactive prompt shipped with Python 3.9.
-export DEBIAN_FRONTEND="noninteractive"
-
 # Install Python.
 apt-get install -y \
     python"$PYTHON_VERSION" \

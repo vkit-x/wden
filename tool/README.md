@@ -41,7 +41,7 @@ docker run \
   --rm -it \
   --user "$(id -u):$(id -g)" \
   -v "$(pwd)":/data \
-  wden/wden:devel-cpu-ubuntu18.04-python3.8
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
 
 ##########################
 # IN THE CONTAINER SHELL #
@@ -89,7 +89,7 @@ docker run \
   --rm -it \
   -e CD_DEFAULT_FOLDER=/data \
   -v "$(pwd)":/data \
-  wden/wden:devel-cpu-ubuntu18.04-python3.8
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
 
 ##########################
 # IN THE CONTAINER SHELL #
@@ -125,7 +125,7 @@ docker run \
   --rm -it \
   -v /run/host-services/ssh-auth.sock:/run/ssh-auth.sock:shared \
   -e SSH_AUTH_SOCK="/run/ssh-auth.sock" \
-  wden/wden:devel-cpu-ubuntu18.04-python3.8
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
 
 
 ##########################
@@ -168,7 +168,7 @@ docker run \
   --rm -it \
   -v "$SSH_AUTH_SOCK":/run/ssh-auth.sock:shared \
   -e SSH_AUTH_SOCK="/run/ssh-auth.sock" \
-  wden/wden:devel-cpu-ubuntu18.04-python3.8
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
 
 
 ##########################
@@ -195,7 +195,7 @@ docker run \
   -v /run/host-services/ssh-auth.sock:/run/ssh-auth.sock:shared \
   -e SSH_AUTH_SOCK="/run/ssh-auth.sock" \
   -e SSH_SOCKS5_PROXY="host.docker.internal:1089" \
-  wden/wden:devel-cpu-ubuntu18.04-python3.8
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
 
 ##########################
 # IN THE CONTAINER SHELL #
@@ -226,7 +226,7 @@ OUTPUT
 docker run \
   --rm -it \
   -v "$HOME"/.gitconfig:/etc/gitconfig:ro \
-  wden/wden:devel-cpu-ubuntu18.04-python3.8
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
 
 ##########################
 # IN THE CONTAINER SHELL #
@@ -253,7 +253,7 @@ Envs:
 docker run \
   --rm -it \
   -e APT_SET_MIRROR_TENCENT=1 \
-  wden/wden:devel-cpu-ubuntu18.04-python3.8
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
 
 ##########################
 # IN THE CONTAINER SHELL #
@@ -283,7 +283,7 @@ Envs:
 docker run \
   --rm -it \
   -e PIP_SET_INDEX_TENCENT=1 \
-  wden/wden:devel-cpu-ubuntu18.04-python3.8
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
 
 ##########################
 # IN THE CONTAINER SHELL #
@@ -306,7 +306,7 @@ docker run \
   --rm -it \
   -v "$HOME"/.bash_history:/run/.bash_history:rw \
   -e HISTFILE=/run/.bash_history \
-  wden/wden:devel-cpu-ubuntu18.04-python3.8
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
 
 ##########################
 # IN THE CONTAINER SHELL #
