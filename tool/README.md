@@ -217,6 +217,31 @@ Hi huntzhan! You've successfully authenticated, but GitHub does not provide shel
 OUTPUT
 ```
 
+### SSH login
+
+Envs:
+
+* `SSHD_AUTHORIZED_KEYS`: Optional. By default, [ssh_wden_rsa_key](https://github.com/vkit-x/wden-ssh-key/blob/master/ssh_wden_rsa_key.pub) has been setup. If you are conserned about the security, pass this env to overwrite the `authorized_keys` file.
+* `SSHD_PORT`: Required. The port to bind sshd service.
+
+```bash
+#####################
+# IN THE HOST SHELL #
+#####################
+docker run \
+  --rm -it \
+  -e SSHD_PORT=3333 \
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
+
+#########################
+# IN ANOTHER HOST SHELL #
+#########################
+ssh wden@localhost \
+    -p 3333 \
+    -o IdentitiesOnly=yes \
+    -o IdentityFile=/path/to/wden-ssh-key/ssh_wden_rsa_key
+```
+
 ### Git config forwarding
 
 ```bash

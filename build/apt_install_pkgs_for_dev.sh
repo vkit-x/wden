@@ -39,6 +39,7 @@ declare -a pkgs=(
     p7zip-full
     git
     direnv
+    jq
 )
 
 apt-get install -y "${pkgs[@]}"

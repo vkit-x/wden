@@ -65,3 +65,13 @@ fi
 
 export GIT_SSH_COMMAND="ssh ${SSH_OPTIONS}"
 alias ssh="ssh ${SSH_OPTIONS}"
+
+# SSH login.
+if [ -n "$SSHD_AUTHORIZED_KEYS" ] ; then
+    echo "$SSHD_AUTHORIZED_KEYS" > "/home/${FIXUID_USER}/.ssh/authorized_keys"
+fi
+
+if [ -n "$SSHD_PORT" ] ; then
+    sudo sed -i "s|#Port 22|Port ${SSHD_PORT}|g" /etc/ssh/sshd_config
+    sudo service ssh start
+fi
