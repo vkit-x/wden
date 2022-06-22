@@ -18,7 +18,10 @@ declare -a pkgs=(
     wget
 
     # ncat for ssh proxy.
+    # Ubuntu 18.04
     nmap
+    # Ubuntu 20.04
+    ncat
 
     # Editor
     vim
