@@ -341,3 +341,15 @@ history
 <Same bash history as host>
 OUTPUT
 ```
+
+### Running as daemon
+
+```bash
+#####################
+# IN THE HOST SHELL #
+#####################
+# NOTE: `-it` must be added.
+docker run \
+  -d -it \
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
+```

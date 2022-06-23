@@ -28,3 +28,6 @@ echo "$BASH_CONFIG" | tee -a /.bashrc > /dev/null
 # Grant all user the access.
 chmod -R 755 /.oh-my-bash
 chmod 755 /.bashrc
+
+# For ssh login.
+echo 'source /.bashrc' >> "/home/${FIXUID_USER}/.bash_profile"

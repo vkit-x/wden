@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "Setting up container..."
+
 function patch_file_permission {
     FILE=$1
     OCTAL_PERMISSIONS=$2
@@ -75,3 +77,5 @@ if [ -n "$SSHD_PORT" ] ; then
     sudo sed -i "s|#Port 22|Port ${SSHD_PORT}|g" /etc/ssh/sshd_config
     sudo service ssh start
 fi
+
+echo "Finished container setup..."
