@@ -2,6 +2,10 @@
 set -euo pipefail
 trap "echo 'error: Script failed: see failed command above'" ERR
 
+# Suppress tzdata interactive prompt required by with Python >= 3.9.
+export DEBIAN_FRONTEND="noninteractive"
+apt-get install -y tzdata
+
 add-apt-repository ppa:deadsnakes/ppa -y
 apt-get update
 

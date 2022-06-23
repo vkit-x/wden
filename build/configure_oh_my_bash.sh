@@ -7,10 +7,12 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/mast
 mv /root/.bashrc /root/.oh-my-bash.bashrc
 
 # Install ble.sh
+apt-get install -y gawk
 git clone --recursive https://github.com/akinomyoga/ble.sh.git /tmp/ble.sh
 cd /tmp/ble.sh
 make
 make install INSDIR=/root/.blesh
+rm -rf /tmp/ble.sh
 
 # Combine.
 BASHRC_CONFIG=$(
@@ -28,6 +30,9 @@ source /root/.oh-my-bash.bashrc
 if [ -f ~/.bash_python ]; then
     source ~/.bash_python
 fi
+
+# direnv (cannot be placed in devel_setup_dynamic.sh)
+eval "$(direnv hook bash)"
 
 # ble.sh
 [[ ${BLE_VERSION-} ]] && ble-attach

@@ -2,7 +2,7 @@
 set -euo pipefail
 trap "echo 'error: Script failed: see failed command above'" ERR
 
-apt-get install -y openssh-server
+apt-get install -y openssh-server jq
 
 git clone https://github.com/vkit-x/wden-ssh-key.git /tmp/wden-ssh-key
 

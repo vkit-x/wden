@@ -28,6 +28,3 @@ if [ -n "$SSH_SOCKS5_PROXY" ] ; then
     export GIT_SSH_COMMAND="ssh ${SSH_OPTIONS}"
     alias ssh="ssh ${SSH_OPTIONS}"
 fi
-
-# direnv.
-eval "$(direnv hook bash)"
