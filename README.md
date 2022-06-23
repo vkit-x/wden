@@ -15,6 +15,7 @@
 	* [Switch to APT mirror sites in China](#Switch-to-APT-mirror-sites-in-China)
 	* [Use PyPI mirror sites in China](#Use-PyPI-mirror-sites-in-China)
 	* [Bash history forwarding](#Bash-history-forwarding)
+	* [Running as daemon](#Running-as-daemon)
 
 
 ## Overview
@@ -375,4 +376,16 @@ history
 << OUTPUT
 <Same bash history as host>
 OUTPUT
+```
+
+### Running as daemon
+
+```bash
+#####################
+# IN THE HOST SHELL #
+#####################
+# NOTE: `-it` must be added.
+docker run \
+  -d -it \
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
 ```
