@@ -4,6 +4,11 @@ trap "echo 'error: Script failed: see failed command above'" ERR
 
 apt-get update
 
+# Suppress tzdata interactive prompt required by with Python >= 3.9.
+# This one cannot be moved to install_python.sh.
+export DEBIAN_FRONTEND="noninteractive"
+apt-get install -y tzdata
+
 declare -a pkgs=(
     sudo
 
