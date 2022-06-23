@@ -20,6 +20,8 @@ cat << "EOF"
 [[ $- == *i* ]] && source /root/.blesh/ble.sh --noattach
 
 # oh-my.zsh
+export DISABLE_UPDATE_PROMPT=true
+export DISABLE_AUTO_UPDATE=true
 source /root/.oh-my-bash.bashrc
 
 # Python.
@@ -38,4 +40,13 @@ echo "$BASHRC_CONFIG" | tee -a /root/.bashrc > /dev/null
 chmod -R 755 /root/
 
 # For ssh login.
-echo 'source /root/.bashrc' >> "/home/${FIXUID_USER}/.bash_profile"
+BASH_PROFILE=$(
+cat << "EOF"
+
+source /root/.bashrc
+source ~/.bash-session-env
+source "$WDEN_RUN_FOLDER"/devel_setup_dynamic.sh
+
+EOF
+)
+echo "$BASH_PROFILE" | tee -a "/home/${FIXUID_USER}/.bash_profile" > /dev/null
