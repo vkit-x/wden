@@ -5,41 +5,57 @@ trap "echo 'error: Script failed: see failed command above'" ERR
 add-apt-repository ppa:deadsnakes/ppa -y
 apt-get update
 
-# Patch Ubuntu 18.04 executables related to python3.
-SYSTEM_DEFAULT_PYTHON_VERSION=$(python3 -c 'import sys; print(sys.version[:3])')
-echo "SYSTEM_DEFAULT_PYTHON_VERSION=${SYSTEM_DEFAULT_PYTHON_VERSION}"
-grep -rl '#!/usr/bin/python3' /usr/bin \
-    | xargs sed -i "s|#!/usr/bin/python3|#!/usr/bin/python${SYSTEM_DEFAULT_PYTHON_VERSION}|g"
-
-echo "Install PYTHON_VERSION=${PYTHON_VERSION}"
-
-# Required for building python.
-# Ubuntu 16.04 doesn't contain python3-distutils, and it's ok to ignore.
-apt-get install --ignore-missing -y python3-distutils || true
-
 # Install Python.
 apt-get install -y \
     python"$PYTHON_VERSION" \
     python"$PYTHON_VERSION"-dev \
     python"$PYTHON_VERSION"-venv
 
-# Install the latest version of pip.
-curl --silent --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | python"$PYTHON_VERSION"
-/usr/local/bin/pip"$PYTHON_VERSION" install -U pip
+# Configs for FIXUID_USER.
+FIXUID_USER_BASH_PYTHON_CONFIG=$(
+cat << EOF
 
-# Allow non-root user to install package.
-chmod -R 777 /usr/lib/python"$PYTHON_VERSION"
-chmod -R 777 /usr/local
-# git clone from repository.
-chmod -R 777 /usr/src
+if [ -z "\$BASH_PYTHON_FLAG" ] ; then
+    shopt -s expand_aliases
+    alias python=python3
 
-# Change the system default python/python3.
-update-alternatives --install /usr/bin/python python /usr/bin/python"$PYTHON_VERSION" 1
-update-alternatives --install /usr/bin/python3 python3 /usr/bin/python"$PYTHON_VERSION" 1
-update-alternatives --install /usr/bin/pip pip /usr/local/bin/pip"$PYTHON_VERSION" 1
-update-alternatives --install /usr/bin/pip3 pip3 /usr/local/bin/pip"$PYTHON_VERSION" 1
+    export PATH=/home/${FIXUID_USER}/.local/bin:\$PATH
 
-echo "python = $(python --version)"
-echo "python3 = $(python --version)"
-echo "pip = $(pip --version)"
-echo "pip3 = $(pip --version)"
+    export BASH_PYTHON_FLAG=1
+fi
+
+EOF
+)
+echo "$FIXUID_USER_BASH_PYTHON_CONFIG" > "/home/${FIXUID_USER}/.bash_python"
+
+su - $FIXUID_USER \
+    -c 'touch ~/.bash_profile'
+echo '. ~/.bash_python' >> "/home/${FIXUID_USER}/.bash_profile"
+echo '. ~/.bash_python' >> "/home/${FIXUID_USER}/.bashrc"
+
+# Install the latest version of pip to FIXUID_USER.
+su - $FIXUID_USER \
+    -c "curl --silent --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | python${PYTHON_VERSION}"
+# Make pip --user as default mode.
+su - $FIXUID_USER \
+    -c "mkdir ~/.pip && touch ~/.pip/pip.conf"
+
+PIP_CONFIG=$(
+cat << EOF
+
+[global]
+user = yes
+
+EOF
+)
+echo "$PIP_CONFIG" | tee -a "/home/${FIXUID_USER}/.pip/pip.conf" > /dev/null
+
+# Show.
+su - $FIXUID_USER \
+    -c "python --version"
+su - $FIXUID_USER \
+    -c "python3 --version"
+su - $FIXUID_USER \
+    -c "pip --version"
+su - $FIXUID_USER \
+    -c "pip3 --version"

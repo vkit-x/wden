@@ -31,6 +31,9 @@ chown -R "${FIXUID_USER}:${FIXUID_GROUP}" "/home/${FIXUID_USER}/.vscode-server"
 
 # Install vscode plugin. (must run as target user)
 CODE_SERVER="/home/${FIXUID_USER}/.vscode-server/bin/${VSCODE_SERVER_COMMIT}/bin/code-server"
-su - $FIXUID_USER -c "${CODE_SERVER} --install-extension ms-python.python"
-su - $FIXUID_USER -c "${CODE_SERVER} --install-extension editorconfig.editorconfig"
-su - $FIXUID_USER -c "${CODE_SERVER} --install-extension canna.box-comment"
+su - $FIXUID_USER \
+    -c "${CODE_SERVER} --install-extension ms-python.python"
+su - $FIXUID_USER \
+    -c "${CODE_SERVER} --install-extension editorconfig.editorconfig"
+su - $FIXUID_USER \
+    -c "${CODE_SERVER} --install-extension canna.box-comment"

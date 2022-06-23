@@ -16,6 +16,11 @@ bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
 bind '"\e[Z":menu-complete-backward'
 
+# Python.
+if [ -f ~/.bash_python ]; then
+    . ~/.bash_python
+fi
+
 EOF
 )
 echo "$BASH_CONFIG" | tee -a /.bashrc > /dev/null
