@@ -43,6 +43,7 @@ declare -a pkgs=(
     git
     direnv
     jq
+    gawk
 )
 
 apt-get install -y "${pkgs[@]}"

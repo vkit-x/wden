@@ -25,7 +25,7 @@ patch_file_permission /dev/zero '666'
 # Load oh-my-bash.
 export DISABLE_UPDATE_PROMPT=true
 export DISABLE_AUTO_UPDATE=true
-source /.bashrc
+source /root/.bashrc
 
 # Load direnv.
 eval "$(direnv hook bash)"

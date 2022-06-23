@@ -3,31 +3,39 @@ set -euo pipefail
 trap "echo 'error: Script failed: see failed command above'" ERR
 
 # Install oh-my-bash.
-export OSH='/.oh-my-bash'
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
-mv /root/.bashrc /.bashrc
+mv /root/.bashrc /root/.oh-my-bash.bashrc
 
-# Other bash configuration.
-BASH_CONFIG=$(
+# Install ble.sh
+git clone --recursive https://github.com/akinomyoga/ble.sh.git /tmp/ble.sh
+cd /tmp/ble.sh
+make
+make install INSDIR=/root/.blesh
+
+# Combine.
+BASHRC_CONFIG=$(
 cat << "EOF"
 
-# Tab completion.
-bind 'set show-all-if-ambiguous on'
-bind 'TAB:menu-complete'
-bind '"\e[Z":menu-complete-backward'
+# ble.sh
+[[ $- == *i* ]] && source /root/.blesh/ble.sh --noattach
+
+# oh-my.zsh
+source /root/.oh-my-bash.bashrc
 
 # Python.
 if [ -f ~/.bash_python ]; then
-    . ~/.bash_python
+    source ~/.bash_python
 fi
+
+# ble.sh
+[[ ${BLE_VERSION-} ]] && ble-attach
 
 EOF
 )
-echo "$BASH_CONFIG" | tee -a /.bashrc > /dev/null
+echo "$BASHRC_CONFIG" | tee -a /root/.bashrc > /dev/null
 
-# Grant all user the access.
-chmod -R 755 /.oh-my-bash
-chmod 755 /.bashrc
+# Deal with permission.
+chmod -R 755 /root/
 
 # For ssh login.
-echo 'source /.bashrc' >> "/home/${FIXUID_USER}/.bash_profile"
+echo 'source /root/.bashrc' >> "/home/${FIXUID_USER}/.bash_profile"

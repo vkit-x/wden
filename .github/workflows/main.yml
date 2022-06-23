@@ -1,30 +1,24 @@
-
 name: devel-cuda
-
 on:
   push:
     branches:
       - master
     paths-ignore:
-      - 'README.md'
-      - '.*'
-      - 'tool/**'
-
+      - "README.md"
+      - ".*"
+      - "tool/**"
 jobs:
   build-cuda:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         # Follows the pytorch supported CUDA versions.
-        cuda_version: ['11.3.1']
-        cudnn_version: ['8']
-        ubuntu_version: ['20.04']
-        python_version: ['3.8', '3.9', '3.10']
-
+        cuda_version: ["11.3.1"]
+        cudnn_version: ["8"]
+        ubuntu_version: ["20.04"]
+        python_version: ["3.8", "3.9", "3.10"]
     steps:
       - uses: actions/checkout@v2
-
       - name: Docker build & push
         run: |
           export TAG=devel-cuda${{ matrix.cuda_version }}-cudnn${{ matrix.cudnn_version }}-ubuntu${{ matrix.ubuntu_version }}-python${{ matrix.python_version }}
@@ -49,15 +43,12 @@ jobs:
             "swr.${{ secrets.HUAWEICLOUD_AREA }}.myhuaweicloud.com"
           docker tag wden/wden:"$TAG" swr."${{ secrets.HUAWEICLOUD_AREA }}".myhuaweicloud.com/wden/wden:"$TAG"
           docker push swr."${{ secrets.HUAWEICLOUD_AREA }}".myhuaweicloud.com/wden/wden:"$TAG"
-
   build-cpu:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        ubuntu_version: ['20.04']
-        python_version: ['3.8', '3.9', '3.10']
-
+        ubuntu_version: ["20.04"]
+        python_version: ["3.8", "3.9", "3.10"]
     steps:
       - uses: actions/checkout@v2
 
