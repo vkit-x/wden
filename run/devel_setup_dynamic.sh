@@ -28,3 +28,10 @@ if [ -n "$SSH_SOCKS5_PROXY" ] ; then
     export GIT_SSH_COMMAND="ssh ${SSH_OPTIONS}"
     alias ssh="ssh ${SSH_OPTIONS}"
 fi
+
+# HTTP proxy.
+if [ -n "$PROPAGATE_HTTPS_PROXY" ] && [ -n "$HTTPS_PROXY" ] ; then
+    export HTTP_PROXY="$HTTPS_PROXY"
+    export https_proxy="$HTTPS_PROXY"
+    export http_proxy="$HTTPS_PROXY"
+fi

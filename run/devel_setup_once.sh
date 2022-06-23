@@ -52,6 +52,7 @@ export PIP_SET_INDEX_ALIYUN='$PIP_SET_INDEX_ALIYUN'
 export CD_DEFAULT_FOLDER='$CD_DEFAULT_FOLDER'
 export SSH_AUTH_SOCK='$SSH_AUTH_SOCK'
 export SSH_SOCKS5_PROXY='$SSH_SOCKS5_PROXY'
+export PROPAGATE_HTTPS_PROXY='$PROPAGATE_HTTPS_PROXY'
 
 # Dockerfile.
 export PYTHONIOENCODING='$PYTHONIOENCODING'
@@ -63,22 +64,12 @@ export FIXUID_GROUP='$FIXUID_GROUP'
 export WDEN_BUILD_FOLDER='$WDEN_BUILD_FOLDER'
 export WDEN_RUN_FOLDER='$WDEN_RUN_FOLDER'
 
-# Other.
+# HTTP proxy.
+export HTTPS_PROXY='$HTTPS_PROXY'
+export HTTP_PROXY='$HTTP_PROXY'
+export https_proxy='$https_proxy'
+export http_proxy='$http_proxy'
 
 EOF
 )
 echo "$BASH_SESSION_ENV" | tee -a ~/.bash-session-env > /dev/null
-
-# Network.
-if [ -n "$HTTPS_PROXY" ] ; then
-    echo "export HTTPS_PROXY='$HTTPS_PROXY'" >> ~/.bash-session-env
-fi
-if [ -n "$HTTP_PROXY" ] ; then
-    echo "export HTTP_PROXY='$HTTP_PROXY'" >> ~/.bash-session-env
-fi
-if [ -n "$https_proxy" ] ; then
-    echo "export https_proxy='$https_proxy'" >> ~/.bash-session-env
-fi
-if [ -n "$http_proxy" ] ; then
-    echo "export http_proxy='$http_proxy'" >> ~/.bash-session-env
-fi
