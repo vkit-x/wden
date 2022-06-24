@@ -31,7 +31,7 @@ if [ -f ~/.bash_python ]; then
     source ~/.bash_python
 fi
 
-# direnv (cannot be placed in devel_setup_dynamic.sh)
+# direnv (cannot be placed in devel_shared_dynamic.sh due to prompt setup conflict)
 eval "$(direnv hook bash)"
 
 # ble.sh
@@ -50,7 +50,7 @@ cat << "EOF"
 
 source /root/.bashrc
 source ~/.bash-session-env
-source "$WDEN_RUN_FOLDER"/devel_setup_dynamic.sh
+source "$WDEN_RUN_FOLDER"/devel_shared_dynamic.sh
 
 EOF
 )

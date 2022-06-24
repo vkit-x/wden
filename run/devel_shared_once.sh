@@ -42,6 +42,10 @@ if [ -n "$SSHD_PORT" ] ; then
     sudo service ssh start
 fi
 
+# Customized script.
+if [ -n "$CUSTOMIZED_ONCE_SH" ] ; then
+    source "$CUSTOMIZED_ONCE_SH"
+fi
 
 BASH_SESSION_ENV=$(
 cat << EOF
@@ -53,6 +57,7 @@ export CD_DEFAULT_FOLDER='$CD_DEFAULT_FOLDER'
 export SSH_AUTH_SOCK='$SSH_AUTH_SOCK'
 export SSH_SOCKS5_PROXY='$SSH_SOCKS5_PROXY'
 export PROPAGATE_HTTPS_PROXY='$PROPAGATE_HTTPS_PROXY'
+export CUSTOMIZED_DYNAMIC_SH='$CUSTOMIZED_DYNAMIC_SH'
 
 # Dockerfile.
 export PYTHONIOENCODING='$PYTHONIOENCODING'

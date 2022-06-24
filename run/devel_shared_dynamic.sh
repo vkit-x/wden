@@ -35,3 +35,8 @@ if [ -n "$PROPAGATE_HTTPS_PROXY" ] && [ -n "$HTTPS_PROXY" ] ; then
     export https_proxy="$HTTPS_PROXY"
     export http_proxy="$HTTPS_PROXY"
 fi
+
+# Customized script.
+if [ -n "$CUSTOMIZED_DYNAMIC_SH" ] ; then
+    source "$CUSTOMIZED_DYNAMIC_SH"
+fi

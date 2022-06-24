@@ -1,21 +1,23 @@
 
 # Table of Contents
-* [Overview](#Overview)
-* [Images](#Images)
-	* [Hosted in Docker Hub](#Hosted-in-Docker-Hub)
-	* [Hosted in Huawei Cloud](#Hosted-in-Huawei-Cloud)
-* [Usage](#Usage)
-	* [UID and GID forwarding](#UID-and-GID-forwarding)
-	* [Change the default cd folder](#Change-the-default-cd-folder)
-	* [SSH agent forwarding in macOS](#SSH-agent-forwarding-in-macOS)
-	* [SSH agent forwarding in Linux](#SSH-agent-forwarding-in-Linux)
-	* [SSH proxy](#SSH-proxy)
-	* [SSH login](#SSH-login)
-	* [Git config forwarding](#Git-config-forwarding)
-	* [Switch to APT mirror sites in China](#Switch-to-APT-mirror-sites-in-China)
-	* [Use PyPI mirror sites in China](#Use-PyPI-mirror-sites-in-China)
-	* [Bash history forwarding](#Bash-history-forwarding)
-	* [Running as daemon](#Running-as-daemon)
+- [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Images](#images)
+    - [Hosted in Docker Hub](#hosted-in-docker-hub)
+    - [Hosted in Huawei Cloud](#hosted-in-huawei-cloud)
+  - [Usage](#usage)
+    - [UID and GID forwarding](#uid-and-gid-forwarding)
+    - [Change the default cd folder](#change-the-default-cd-folder)
+    - [SSH agent forwarding in macOS](#ssh-agent-forwarding-in-macos)
+    - [SSH agent forwarding in Linux](#ssh-agent-forwarding-in-linux)
+    - [SSH proxy](#ssh-proxy)
+    - [SSH login](#ssh-login)
+    - [Git config forwarding](#git-config-forwarding)
+    - [Switch to APT mirror sites in China](#switch-to-apt-mirror-sites-in-china)
+    - [Use PyPI mirror sites in China](#use-pypi-mirror-sites-in-china)
+    - [Bash history forwarding](#bash-history-forwarding)
+    - [Running as daemon](#running-as-daemon)
+    - [HTTP proxy setup](#http-proxy-setup)
 
 
 ## Overview
@@ -388,4 +390,44 @@ OUTPUT
 docker run \
   -d -it \
   wden/wden:devel-cpu-ubuntu20.04-python3.8
+```
+
+### HTTP proxy setup
+
+Env:
+
+* `PROPAGATE_HTTPS_PROXY`: If set, will propagate `HTTPS_PROXY` to `HTTP_PROXY`, `https_proxy`, and `http_proxy`
+
+```bash
+#####################
+# IN THE HOST SHELL #
+#####################
+docker run \
+  --rm -it \
+  -e PROPAGATE_HTTPS_PROXY=1 \
+  -e HTTPS_PROXY='http://host.docker.internal:8889' \
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
+
+##########################
+# IN THE CONTAINER SHELL #
+##########################
+echo $HTTPS_PROXY
+<< OUTPUT
+http://host.docker.internal:8889
+OUTPUT
+
+echo $HTTP_PROXY
+<< OUTPUT
+http://host.docker.internal:8889
+OUTPUT
+
+echo $https_proxy
+<< OUTPUT
+http://host.docker.internal:8889
+OUTPUT
+
+echo $http_proxy
+<< OUTPUT
+http://host.docker.internal:8889
+OUTPUT
 ```
