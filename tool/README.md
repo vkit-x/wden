@@ -353,3 +353,43 @@ docker run \
   -d -it \
   wden/wden:devel-cpu-ubuntu20.04-python3.8
 ```
+
+### HTTP proxy setup
+
+Env:
+
+* `PROPAGATE_HTTPS_PROXY`: If set, will propagate `HTTPS_PROXY` to `HTTP_PROXY`, `https_proxy`, and `http_proxy`
+
+```bash
+#####################
+# IN THE HOST SHELL #
+#####################
+docker run \
+  --rm -it \
+  -e PROPAGATE_HTTPS_PROXY=1 \
+  -e HTTPS_PROXY='http://host.docker.internal:8889' \
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
+
+##########################
+# IN THE CONTAINER SHELL #
+##########################
+echo $HTTPS_PROXY
+<< OUTPUT
+http://host.docker.internal:8889
+OUTPUT
+
+echo $HTTP_PROXY
+<< OUTPUT
+http://host.docker.internal:8889
+OUTPUT
+
+echo $https_proxy
+<< OUTPUT
+http://host.docker.internal:8889
+OUTPUT
+
+echo $http_proxy
+<< OUTPUT
+http://host.docker.internal:8889
+OUTPUT
+```

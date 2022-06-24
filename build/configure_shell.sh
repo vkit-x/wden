@@ -48,7 +48,9 @@ echo "$BASHRC_CONFIG" | tee -a /root/.bashrc > /dev/null
 # Deal with permission.
 chmod -R 755 /root/
 
-# For ssh login.
+# Shell entry.
+apt-get install -y screen
+
 BASH_PROFILE=$(
 cat << "EOF"
 

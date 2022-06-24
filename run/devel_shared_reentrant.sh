@@ -40,3 +40,13 @@ fi
 if [ -n "$CUSTOMIZED_REENTRANT_SH" ] ; then
     source "$CUSTOMIZED_REENTRANT_SH"
 fi
+
+# Attach screen session.
+if [ -z "$DISABLE_SCREEN_DAEMON" ] && [ -z "$IN_DOCKER_RUN_SESSION" ] && [ -z "$STY" ] ; then
+    SCREEN_LIST=$(screen -list)
+    if [[ "$SCREEN_LIST" =~ "Attached" ]] ; then
+        echo "Attached screen session detected, stop attaching..."
+    else
+        screen -a -A -U -D -r
+    fi
+fi

@@ -1,0 +1,38 @@
+name: debug
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - "README.md"
+      - ".*"
+      - "tool/**"
+jobs:
+  build-cpu:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ubuntu_version: ["20.04"]
+        python_version: ["3.8"]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Docker build & push
+        run: |
+          export TAG=debug-devel-cpu-ubuntu${{ matrix.ubuntu_version }}-python${{ matrix.python_version }}
+
+          docker build \
+            --no-cache \
+            --progress=plain \
+            --build-arg UBUNTU_VERSION=${{ matrix.ubuntu_version }} \
+            --build-arg PYTHON_VERSION=${{ matrix.python_version }} \
+            -t wden/wden:"$TAG" \
+            -f dockerfile/devel_cpu \
+            .
+
+          docker login \
+            --username="${{ secrets.HUAWEICLOUD_AREA }}@${{ secrets.HUAWEICLOUD_AK }}" \
+            --password=${{ secrets.HUAWEICLOUD_TOKEN }} \
+            "swr.${{ secrets.HUAWEICLOUD_AREA }}.myhuaweicloud.com"
+          docker tag wden/wden:"$TAG" swr."${{ secrets.HUAWEICLOUD_AREA }}".myhuaweicloud.com/wden/wden:"$TAG"
+          docker push swr."${{ secrets.HUAWEICLOUD_AREA }}".myhuaweicloud.com/wden/wden:"$TAG"

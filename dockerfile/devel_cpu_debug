@@ -1,0 +1,2 @@
+FROM wden/wden:debug-devel-cpu-ubuntu20.04-python3.8
+COPY run "$WDEN_RUN_FOLDER"

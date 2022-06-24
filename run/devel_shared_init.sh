@@ -49,6 +49,45 @@ if [ -n "$CUSTOMIZED_INIT_SH" ] ; then
     source "$CUSTOMIZED_INIT_SH"
 fi
 
+# Screen session.
+if [ -z "$DISABLE_SCREEN_DAEMON" ] ; then
+    # screen config.
+    # https://www.gnu.org/software/screen/manual/html_node/Bind.html#Bind
+    # https://www.gnu.org/software/screen/manual/html_node/Default-Key-Bindings.html#Default-Key-Bindings
+    # https://www.gnu.org/software/screen/manual/html_node/Bind-Examples.html#Bind-Examples
+    SCREENRC=$(
+cat << 'EOF'
+
+# As login shell
+defshell -bash
+
+# Reset some envs since screen session inherits envs.
+unsetenv BASH_PYTHON_FLAG
+unsetenv PATH
+
+# alternate screen.
+altscreen on
+
+# Unbind all the bindings.
+unbindall
+
+# Then enable the following bindings.
+bind -c demo d detach
+
+# C-n
+bindkey "^N" command -c demo
+
+EOF
+)
+    echo "$SCREENRC" | tee -a ~/.screenrc > /dev/null
+    # Start up screen as daemon.
+    args=()
+    if [ -n "$SCREEN_DAEMON_LOG" ] ; then
+        args=(-L -Logfile "$SCREEN_DAEMON_LOG")
+    fi
+    screen -dmS daemon "${args[@]}"
+fi
+
 BASH_SESSION_ENV=$(
 cat << EOF
 
@@ -61,6 +100,7 @@ export SSH_AUTH_SOCK='$SSH_AUTH_SOCK'
 export SSH_SOCKS5_PROXY='$SSH_SOCKS5_PROXY'
 export PROPAGATE_HTTPS_PROXY='$PROPAGATE_HTTPS_PROXY'
 export CUSTOMIZED_REENTRANT_SH='$CUSTOMIZED_REENTRANT_SH'
+export DISABLE_SCREEN_DAEMON='$DISABLE_SCREEN_DAEMON'
 
 # Dockerfile.
 export PYTHONIOENCODING='$PYTHONIOENCODING'
@@ -82,5 +122,7 @@ export http_proxy='$http_proxy'
 EOF
 )
 echo "$BASH_SESSION_ENV" | tee -a ~/.bash-session-env > /dev/null
+
+export IN_DOCKER_RUN_SESSION=1
 
 echo "Finished container setup..."

@@ -1,12 +1,5 @@
-name: devel-cuda
-on:
-  push:
-    branches:
-      - master
-    paths-ignore:
-      - "README.md"
-      - ".*"
-      - "tool/**"
+name: publish
+on: workflow_dispatch
 jobs:
   build-cuda:
     runs-on: ubuntu-latest
