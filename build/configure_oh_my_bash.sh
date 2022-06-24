@@ -19,7 +19,9 @@ BASHRC_CONFIG=$(
 cat << "EOF"
 
 # ble.sh
-[[ $- == *i* ]] && source /root/.blesh/ble.sh --noattach
+if [ -n "$ENABLE_BLE_SH" ] ; then
+    [[ $- == *i* ]] && source /root/.blesh/ble.sh --noattach
+fi
 
 # oh-my.zsh
 export DISABLE_UPDATE_PROMPT=true
@@ -35,7 +37,9 @@ fi
 eval "$(direnv hook bash)"
 
 # ble.sh
-[[ ${BLE_VERSION-} ]] && ble-attach
+if [ -n "$ENABLE_BLE_SH" ] ; then
+    [[ ${BLE_VERSION-} ]] && ble-attach
+fi
 
 EOF
 )
@@ -60,4 +64,4 @@ source "$WDEN_RUN_FOLDER"/run_${WDEN_RUN_TAG}_reentrant.sh
 
 EOF
 )
-echo "$BASH_PROFILE" | tee -a "/home/${FIXUID_USER}/.bash_profile" > /dev/null
+echo "$BASH_PROFILE" | tee "/home/${FIXUID_USER}/.bash_profile" > /dev/null

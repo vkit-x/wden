@@ -31,8 +31,6 @@ echo "$FIXUID_USER_BASH_PYTHON_CONFIG" > "/home/${FIXUID_USER}/.bash_python"
 su - $FIXUID_USER \
     -c 'touch ~/.bash_profile'
 echo '. ~/.bash_python' >> "/home/${FIXUID_USER}/.bash_profile"
-# Only got invoked as an interactive non-login shell.
-echo '. ~/.bash_python' >> "/home/${FIXUID_USER}/.bashrc"
 
 # Install the latest version of pip to FIXUID_USER.
 su - $FIXUID_USER \
