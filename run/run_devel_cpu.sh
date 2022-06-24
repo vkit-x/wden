@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-exec bash --init-file "$WDEN_RUN_FOLDER"/devel_cpu.sh
+exec bash --login --init-file "$WDEN_RUN_FOLDER"/devel_cpu.sh
