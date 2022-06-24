@@ -31,7 +31,7 @@ if [ -f ~/.bash_python ]; then
     source ~/.bash_python
 fi
 
-# direnv (cannot be placed in devel_shared_dynamic.sh due to prompt setup conflict)
+# direnv (cannot be placed in devel_shared_reentrant.sh due to prompt setup conflict)
 eval "$(direnv hook bash)"
 
 # ble.sh
@@ -49,8 +49,14 @@ BASH_PROFILE=$(
 cat << "EOF"
 
 source /root/.bashrc
-source ~/.bash-session-env
-source "$WDEN_RUN_FOLDER"/devel_shared_dynamic.sh
+
+if [ ! -f ~/.bash-session-env ]; then
+    source "${WDEN_RUN_FOLDER}/run_${WDEN_RUN_TAG}_init.sh"
+else
+    source ~/.bash-session-env
+fi
+
+source "$WDEN_RUN_FOLDER"/run_${WDEN_RUN_TAG}_reentrant.sh
 
 EOF
 )

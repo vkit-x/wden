@@ -37,6 +37,6 @@ if [ -n "$PROPAGATE_HTTPS_PROXY" ] && [ -n "$HTTPS_PROXY" ] ; then
 fi
 
 # Customized script.
-if [ -n "$CUSTOMIZED_DYNAMIC_SH" ] ; then
-    source "$CUSTOMIZED_DYNAMIC_SH"
+if [ -n "$CUSTOMIZED_REENTRANT_SH" ] ; then
+    source "$CUSTOMIZED_REENTRANT_SH"
 fi

@@ -11,7 +11,8 @@ ENV PYTHONIOENCODING=UTF-8 \
     FIXUID_USER=wden \
     FIXUID_GROUP=wden \
     WDEN_BUILD_FOLDER=/.wden-build \
-    WDEN_RUN_FOLDER=/.wden-run
+    WDEN_RUN_FOLDER=/.wden-run \
+    WDEN_RUN_TAG='devel_cpu'
 
 COPY build "$WDEN_BUILD_FOLDER"
 COPY run "$WDEN_RUN_FOLDER"
@@ -20,4 +21,4 @@ RUN "$WDEN_BUILD_FOLDER"/devel_cpu.sh
 
 USER "$FIXUID_USER":"$FIXUID_GROUP"
 ENTRYPOINT ["fixuid", "-q"]
-CMD "$WDEN_RUN_FOLDER"/run_devel_cpu.sh
+CMD "$WDEN_RUN_FOLDER"/run.sh
