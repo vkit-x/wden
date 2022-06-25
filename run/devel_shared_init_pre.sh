@@ -2,8 +2,6 @@
 
 echo "Setting up container..."
 
-export IN_DOCKER_RUN_SESSION=1
-
 function patch_file_permission {
     FILE=$1
     OCTAL_PERMISSIONS=$2
@@ -58,8 +56,11 @@ cat << 'EOF'
 # As login shell
 defshell -bash
 
+# https://vim.fandom.com/wiki/GNU_Screen_integration
+term screen-256color
+maptimeout 5
+
 # Reset some envs since screen session inherits envs.
-unsetenv IN_DOCKER_RUN_SESSION
 unsetenv BASH_PYTHON_FLAG
 unsetenv PATH
 

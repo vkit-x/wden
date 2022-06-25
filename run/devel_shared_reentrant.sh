@@ -37,10 +37,6 @@ if [ -n "$PROPAGATE_HTTPS_PROXY" ] && [ -n "$HTTPS_PROXY" ] ; then
 fi
 
 # Customized script.
-if [ -n "$IN_DOCKER_RUN_SESSION" ] && [ -z "$STY" ] && [ -n "$CUSTOMIZED_INIT_SH" ] ; then
-    source "$CUSTOMIZED_INIT_SH"
-fi
-
 if [ -n "$CUSTOMIZED_REENTRANT_SH" ] ; then
     source "$CUSTOMIZED_REENTRANT_SH"
 fi

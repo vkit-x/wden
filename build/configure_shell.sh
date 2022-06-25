@@ -57,12 +57,18 @@ cat << "EOF"
 source /root/.bashrc
 
 if [ ! -f ~/.bash-session-env ]; then
-    source "${WDEN_RUN_FOLDER}/run_${WDEN_RUN_TAG}_init.sh"
+    source "${WDEN_RUN_FOLDER}/run_${WDEN_RUN_TAG}_init_pre.sh"
+    # NOTE: if place before init_pre.sh, the screen daemon session will inherits this var.
+    export IN_DOCKER_RUN_SESSION=1
 else
     source ~/.bash-session-env
 fi
 
 source "$WDEN_RUN_FOLDER"/run_${WDEN_RUN_TAG}_reentrant.sh
+
+if [ -n "$IN_DOCKER_RUN_SESSION" ] ; then
+    source "${WDEN_RUN_FOLDER}/run_${WDEN_RUN_TAG}_init_post.sh"
+fi
 
 EOF
 )
