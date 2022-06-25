@@ -2,6 +2,8 @@
 
 echo "Setting up container..."
 
+export IN_DOCKER_RUN_SESSION=1
+
 function patch_file_permission {
     FILE=$1
     OCTAL_PERMISSIONS=$2
@@ -44,11 +46,6 @@ if [ -n "$SSHD_PORT" ] ; then
     sudo service ssh start
 fi
 
-# Customized script.
-if [ -n "$CUSTOMIZED_INIT_SH" ] ; then
-    source "$CUSTOMIZED_INIT_SH"
-fi
-
 # Screen session.
 if [ -z "$DISABLE_SCREEN_DAEMON" ] ; then
     # screen config.
@@ -62,6 +59,7 @@ cat << 'EOF'
 defshell -bash
 
 # Reset some envs since screen session inherits envs.
+unsetenv IN_DOCKER_RUN_SESSION
 unsetenv BASH_PYTHON_FLAG
 unsetenv PATH
 
@@ -122,7 +120,5 @@ export http_proxy='$http_proxy'
 EOF
 )
 echo "$BASH_SESSION_ENV" | tee -a ~/.bash-session-env > /dev/null
-
-export IN_DOCKER_RUN_SESSION=1
 
 echo "Finished container setup..."
