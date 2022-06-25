@@ -51,6 +51,6 @@ if [ -z "$DISABLE_SCREEN_DAEMON" ] && [ -z "$IN_DOCKER_RUN_SESSION" ] && [ -z "$
     if [[ "$SCREEN_LIST" =~ "Attached" ]] ; then
         echo "Attached screen session detected, stop attaching..."
     else
-        screen -a -A -U -D -r
+        screen -a -A -U -r
     fi
 fi
