@@ -11,16 +11,19 @@ apt-get install -y \
     python"$PYTHON_VERSION"-dev \
     python"$PYTHON_VERSION"-venv
 
+su - $FIXUID_USER \
+    -c 'mkdir -p ~/.local/bin'
+su - $FIXUID_USER \
+    -c 'ln -s /usr/bin/python3 ~/.local/bin/python'
+su - $FIXUID_USER \
+    -c 'ln -s /usr/bin/python3 ~/.local/bin/python3'
+
 # Configs for FIXUID_USER.
 FIXUID_USER_BASH_PYTHON_CONFIG=$(
 cat << EOF
 
 if [ -z "\$BASH_PYTHON_FLAG" ] ; then
-    shopt -s expand_aliases
-    alias python=python3
-
     export PATH=/home/${FIXUID_USER}/.local/bin:\$PATH
-
     export BASH_PYTHON_FLAG=1
 fi
 
