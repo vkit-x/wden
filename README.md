@@ -1,22 +1,23 @@
 
 # Table of Contents
-- [Table of Contents](#table-of-contents)
-  - [Overview](#overview)
-  - [Images](#images)
-    - [Hosted in Docker Hub](#hosted-in-docker-hub)
-    - [Hosted in Huawei Cloud](#hosted-in-huawei-cloud)
-  - [Usage](#usage)
-    - [UID and GID forwarding](#uid-and-gid-forwarding)
-    - [Change the default cd folder](#change-the-default-cd-folder)
-    - [SSH agent forwarding in macOS](#ssh-agent-forwarding-in-macos)
-    - [SSH agent forwarding in Linux](#ssh-agent-forwarding-in-linux)
-    - [SSH proxy](#ssh-proxy)
-    - [SSH login](#ssh-login)
-    - [Git config forwarding](#git-config-forwarding)
-    - [Switch to APT mirror sites in China](#switch-to-apt-mirror-sites-in-china)
-    - [Use PyPI mirror sites in China](#use-pypi-mirror-sites-in-china)
-    - [Bash history forwarding](#bash-history-forwarding)
-    - [Running as daemon](#running-as-daemon)
+* [Overview](#Overview)
+* [Images](#Images)
+	* [Hosted in Docker Hub](#Hosted-in-Docker-Hub)
+	* [Hosted in Huawei Cloud](#Hosted-in-Huawei-Cloud)
+* [Usage](#Usage)
+	* [UID and GID forwarding](#UID-and-GID-forwarding)
+	* [Change the default cd folder](#Change-the-default-cd-folder)
+	* [SSH agent forwarding in macOS](#SSH-agent-forwarding-in-macOS)
+	* [SSH agent forwarding in Linux](#SSH-agent-forwarding-in-Linux)
+	* [SSH proxy](#SSH-proxy)
+	* [SSH login](#SSH-login)
+	* [Git config forwarding](#Git-config-forwarding)
+	* [Switch to APT mirror sites in China](#Switch-to-APT-mirror-sites-in-China)
+	* [Use PyPI mirror sites in China](#Use-PyPI-mirror-sites-in-China)
+	* [Bash history forwarding](#Bash-history-forwarding)
+	* [Running as daemon](#Running-as-daemon)
+	* [HTTP proxy setup](#HTTP-proxy-setup)
+	* [Customized scirpts](#Customized-scirpts)
 
 
 ## Overview
@@ -47,12 +48,12 @@ As a known issue, pulling from docker hub is intolerably slow for users in China
 
 | Construct | `docker pull` command |
 | --------- | -------------------- |
-| CUDA=11.3.1, CUDNN=8, PYTHON=3.10, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.3.1-cudnn8-ubuntu20.04-python3.10` |
-| CUDA=11.3.1, CUDNN=8, PYTHON=3.8, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.3.1-cudnn8-ubuntu20.04-python3.8` |
-| CUDA=11.3.1, CUDNN=8, PYTHON=3.9, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.3.1-cudnn8-ubuntu20.04-python3.9` |
-| PYTHON=3.10, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cpu-ubuntu20.04-python3.10` |
-| PYTHON=3.8, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cpu-ubuntu20.04-python3.8` |
-| PYTHON=3.9, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cpu-ubuntu20.04-python3.9` |
+| CUDA=11.3.1, CUDNN=8, PYTHON=3.10, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.3.1-cudnn8-ubuntu20.04-python3.10 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.3.1-cudnn8-ubuntu20.04-python3.10 wden/wden:devel-cuda11.3.1-cudnn8-ubuntu20.04-python3.10 ` |
+| CUDA=11.3.1, CUDNN=8, PYTHON=3.8, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.3.1-cudnn8-ubuntu20.04-python3.8 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.3.1-cudnn8-ubuntu20.04-python3.8 wden/wden:devel-cuda11.3.1-cudnn8-ubuntu20.04-python3.8 ` |
+| CUDA=11.3.1, CUDNN=8, PYTHON=3.9, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.3.1-cudnn8-ubuntu20.04-python3.9 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.3.1-cudnn8-ubuntu20.04-python3.9 wden/wden:devel-cuda11.3.1-cudnn8-ubuntu20.04-python3.9 ` |
+| PYTHON=3.10, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cpu-ubuntu20.04-python3.10 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cpu-ubuntu20.04-python3.10 wden/wden:devel-cpu-ubuntu20.04-python3.10 ` |
+| PYTHON=3.8, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cpu-ubuntu20.04-python3.8 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cpu-ubuntu20.04-python3.8 wden/wden:devel-cpu-ubuntu20.04-python3.8 ` |
+| PYTHON=3.9, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cpu-ubuntu20.04-python3.9 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cpu-ubuntu20.04-python3.9 wden/wden:devel-cpu-ubuntu20.04-python3.9 ` |
 
 
 ## Usage
@@ -114,7 +115,7 @@ OUTPUT
 
 ### Change the default cd folder
 
-Envs:
+Env:
 
 * `CD_DEFAULT_FOLDER` : If set, initialize the shell and change the `cd` default folder to this path.
 
@@ -216,7 +217,7 @@ docker run \
 
 ### SSH proxy
 
-Envs:
+Env:
 
 * `SSH_SOCKS5_PROXY`: Should be formatted as `<host>:<port>`. If set, use such socks5 proxy in ssh connection.
 
@@ -256,10 +257,11 @@ OUTPUT
 
 ### SSH login
 
-Envs:
+Env:
 
-* `SSHD_AUTHORIZED_KEYS`: Optional. By default, [ssh_wden_rsa_key](https://github.com/vkit-x/wden-ssh-key/blob/master/ssh_wden_rsa_key.pub) has been setup. If you are conserned about the security, pass this env to overwrite the `authorized_keys` file.
-* `SSHD_PORT`: Required. The port to bind sshd service.
+* `SSHD_AUTHORIZED_KEYS`: By default, [ssh_wden_rsa_key](https://github.com/vkit-x/wden-ssh-key/blob/master/ssh_wden_rsa_key.pub) has been setup. If you are conserned about the security, set this env to overwrite the `authorized_keys` file.
+* `SSHD_PORT`: If set, start the sshd service and bind to this port.
+* `DISABLE_SCREEN_DAEMON`: Disable the screen session for remote login.
 
 ```bash
 #####################
@@ -303,7 +305,7 @@ OUTPUT
 
 ### Switch to APT mirror sites in China
 
-Envs:
+Env:
 
 * `APT_SET_MIRROR_TENCENT` : If set, switch to use [Tencent's mirror](https://mirrors.cloud.tencent.com/help/ubuntu.html).
 * `APT_SET_MIRROR_ALIYUN` : If set, switch to use [Aliyun's mirror](https://developer.aliyun.com/mirror/ubuntu).
@@ -333,7 +335,7 @@ OUTPUT
 
 ### Use PyPI mirror sites in China
 
-Envs:
+Env:
 
 * `PIP_SET_INDEX_TENCENT`: Use Tencent's PyPI index.
 * `PIP_SET_INDEX_ALIYUN` : Use Aliyun's PyPI index.
@@ -365,9 +367,7 @@ OUTPUT
 # "$HOME"/.bash_history will be forwarded to and changed by the container.
 # https://ss64.com/bash/history.html
 docker run \
-  --rm -it \
-  -v "$HOME"/.bash_history:/run/.bash_history:rw \
-  -e HISTFILE=/run/.bash_history \
+  -d -it \
   wden/wden:devel-cpu-ubuntu20.04-python3.8
 
 ##########################
@@ -388,5 +388,65 @@ OUTPUT
 # NOTE: `-it` must be added.
 docker run \
   -d -it \
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
+```
+
+### HTTP proxy setup
+
+Env:
+
+* `PROPAGATE_HTTPS_PROXY`: If set, will propagate `HTTPS_PROXY` to `HTTP_PROXY`, `https_proxy`, and `http_proxy`
+
+```bash
+#####################
+# IN THE HOST SHELL #
+#####################
+docker run \
+  --rm -it \
+  -e PROPAGATE_HTTPS_PROXY=1 \
+  -e HTTPS_PROXY='http://host.docker.internal:8889' \
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
+
+##########################
+# IN THE CONTAINER SHELL #
+##########################
+echo $HTTPS_PROXY
+<< OUTPUT
+http://host.docker.internal:8889
+OUTPUT
+
+echo $HTTP_PROXY
+<< OUTPUT
+http://host.docker.internal:8889
+OUTPUT
+
+echo $https_proxy
+<< OUTPUT
+http://host.docker.internal:8889
+OUTPUT
+
+echo $http_proxy
+<< OUTPUT
+http://host.docker.internal:8889
+OUTPUT
+```
+
+### Customized scirpts
+
+Env:
+
+* `CUSTOMIZED_INIT_SH`: If set, this var should be the path to your script that will be executed only once during container setup.
+* `CUSTOMIZED_REENTRANT_SH`: If set, this var should be the path to your script that will be executed in every login session.
+
+```bash
+#####################
+# IN THE HOST SHELL #
+#####################
+docker run \
+  --rm -it \
+  -v /path/to/customized_init.sh:/run/customized_init.sh \
+  -v /path/to/customized_reentrant.sh:/run/customized_reentrant.sh \
+  -e CUSTOMIZED_INIT_SH='/run/customized_init.sh'\
+  -e CUSTOMIZED_REENTRANT_SH='/run/customized_reentrant.sh'\
   wden/wden:devel-cpu-ubuntu20.04-python3.8
 ```

@@ -105,7 +105,10 @@ def build(readme_md, main_yml, output):
                 key = key.upper()
                 bases.append(f'{key}={val}')
             bases = ', '.join(bases)
-            table.append(f'| {bases} | `docker pull {registry_prefix}wden/wden:{tag}` |')
+            if not registry_prefix:
+                table.append(f'| {bases} | `docker pull wden/wden:{tag}` |')
+            else:
+                table.append(f'| {bases} | `docker pull {registry_prefix}wden/wden:{tag} && docker tag {registry_prefix}wden/wden:{tag} wden/wden:{tag} ` |')
         return '\n'.join(table)
 
     table_docker_hub = build_table('')

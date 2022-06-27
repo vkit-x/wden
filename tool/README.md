@@ -77,7 +77,7 @@ OUTPUT
 
 ### Change the default cd folder
 
-Envs:
+Env:
 
 * `CD_DEFAULT_FOLDER` : If set, initialize the shell and change the `cd` default folder to this path.
 
@@ -179,7 +179,7 @@ docker run \
 
 ### SSH proxy
 
-Envs:
+Env:
 
 * `SSH_SOCKS5_PROXY`: Should be formatted as `<host>:<port>`. If set, use such socks5 proxy in ssh connection.
 
@@ -219,10 +219,11 @@ OUTPUT
 
 ### SSH login
 
-Envs:
+Env:
 
-* `SSHD_AUTHORIZED_KEYS`: Optional. By default, [ssh_wden_rsa_key](https://github.com/vkit-x/wden-ssh-key/blob/master/ssh_wden_rsa_key.pub) has been setup. If you are conserned about the security, pass this env to overwrite the `authorized_keys` file.
-* `SSHD_PORT`: Required. The port to bind sshd service.
+* `SSHD_AUTHORIZED_KEYS`: By default, [ssh_wden_rsa_key](https://github.com/vkit-x/wden-ssh-key/blob/master/ssh_wden_rsa_key.pub) has been setup. If you are conserned about the security, set this env to overwrite the `authorized_keys` file.
+* `SSHD_PORT`: If set, start the sshd service and bind to this port.
+* `DISABLE_SCREEN_DAEMON`: Disable the screen session for remote login.
 
 ```bash
 #####################
@@ -266,7 +267,7 @@ OUTPUT
 
 ### Switch to APT mirror sites in China
 
-Envs:
+Env:
 
 * `APT_SET_MIRROR_TENCENT` : If set, switch to use [Tencent's mirror](https://mirrors.cloud.tencent.com/help/ubuntu.html).
 * `APT_SET_MIRROR_ALIYUN` : If set, switch to use [Aliyun's mirror](https://developer.aliyun.com/mirror/ubuntu).
@@ -296,7 +297,7 @@ OUTPUT
 
 ### Use PyPI mirror sites in China
 
-Envs:
+Env:
 
 * `PIP_SET_INDEX_TENCENT`: Use Tencent's PyPI index.
 * `PIP_SET_INDEX_ALIYUN` : Use Aliyun's PyPI index.
@@ -328,9 +329,7 @@ OUTPUT
 # "$HOME"/.bash_history will be forwarded to and changed by the container.
 # https://ss64.com/bash/history.html
 docker run \
-  --rm -it \
-  -v "$HOME"/.bash_history:/run/.bash_history:rw \
-  -e HISTFILE=/run/.bash_history \
+  -d -it \
   wden/wden:devel-cpu-ubuntu20.04-python3.8
 
 ##########################
@@ -392,4 +391,24 @@ echo $http_proxy
 << OUTPUT
 http://host.docker.internal:8889
 OUTPUT
+```
+
+### Customized scirpts
+
+Env:
+
+* `CUSTOMIZED_INIT_SH`: If set, this var should be the path to your script that will be executed only once during container setup.
+* `CUSTOMIZED_REENTRANT_SH`: If set, this var should be the path to your script that will be executed in every login session.
+
+```bash
+#####################
+# IN THE HOST SHELL #
+#####################
+docker run \
+  --rm -it \
+  -v /path/to/customized_init.sh:/run/customized_init.sh \
+  -v /path/to/customized_reentrant.sh:/run/customized_reentrant.sh \
+  -e CUSTOMIZED_INIT_SH='/run/customized_init.sh'\
+  -e CUSTOMIZED_REENTRANT_SH='/run/customized_reentrant.sh'\
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
 ```
