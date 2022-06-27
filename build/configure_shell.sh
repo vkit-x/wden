@@ -24,15 +24,10 @@ if [ -n "$ENABLE_BLE_SH" ] ; then
 fi
 
 # oh-my.zsh
-if [ -n "$ENABLE_OH_MY_BASH" ] ; then
+if [ -z "$DISABLE_OH_MY_BASH" ] ; then
     export DISABLE_UPDATE_PROMPT=true
     export DISABLE_AUTO_UPDATE=true
     source /root/.oh-my-bash.bashrc
-fi
-
-# Python.
-if [ -f ~/.bash_python ]; then
-    source ~/.bash_python
 fi
 
 # direnv (cannot be placed in devel_shared_reentrant.sh due to prompt setup conflict)
@@ -56,7 +51,11 @@ apt-get install -y screen
 BASH_PROFILE=$(
 cat << "EOF"
 
+# Shell.
 source /root/.bashrc
+
+# Python
+source ~/.bash_python
 
 if [ ! -f ~/.bash-session-env ]; then
     source "${WDEN_RUN_FOLDER}/run_${WDEN_RUN_TAG}_init_pre.sh"
