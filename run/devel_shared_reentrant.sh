@@ -45,7 +45,10 @@ fi
 eval "$(direnv hook bash)"
 
 # Attach screen session.
-if [ -z "$DISABLE_SCREEN_DAEMON" ] && [ -z "$IN_DOCKER_RUN_SESSION" ] && [ -z "$STY" ] ; then
+if [ -z "$DISABLE_SCREEN_DAEMON" ] \
+        && [ -z "$IN_DOCKER_RUN_SESSION" ] \
+        && [ -z "$BASHRC_EXECUTED" ] \
+        && [ -z "$STY" ] ; then
     SCREEN_LIST=$(screen -list)
     if [[ "$SCREEN_LIST" =~ "Attached" ]] ; then
         echo "Attached screen session detected, stop attaching..."

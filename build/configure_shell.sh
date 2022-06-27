@@ -29,10 +29,12 @@ apt-get install -y screen
 BASH_PROFILE=$(
 cat << "EOF"
 
+export BASH_PROFILE_EXECUTED=1
+
 # Shell.
 source /root/.bashrc
 
-# Python
+# Python.
 source ~/.bash_python
 
 if [ ! -f ~/.bash-session-env ]; then
@@ -52,3 +54,28 @@ fi
 EOF
 )
 echo "$BASH_PROFILE" | tee "/home/${FIXUID_USER}/.bash_profile" > /dev/null
+
+su - $FIXUID_USER \
+    -c "cp ~/.bashrc ~/.bashrc.bak"
+BASHRC=$(
+cat << 'EOF'
+
+if [ -n "$BASH_PROFILE_EXECUTED" ] ; then
+    return
+fi
+
+export BASHRC_EXECUTED=1
+
+# Shell.
+source /root/.bashrc
+
+# Python.
+source ~/.bash_python
+
+# Reentrant.
+source ~/.bash-session-env
+source "$WDEN_RUN_FOLDER"/run_${WDEN_RUN_TAG}_reentrant.sh
+
+EOF
+)
+echo "$BASHRC" | tee "/home/${FIXUID_USER}/.bashrc" > /dev/null
