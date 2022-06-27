@@ -17,12 +17,13 @@ if [ -n "$CD_DEFAULT_FOLDER" ] ; then
     fi
 fi
 
-# SSH agent.
+# SSH agent & proxy.
+export SSH_OPTIONS=''
+
 if [ -n "$SSH_AUTH_SOCK" ] ; then
     export SSH_OPTIONS='-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 fi
 
-# SSH proxy.
 if [ -n "$SSH_SOCKS5_PROXY" ] ; then
     export SSH_OPTIONS="${SSH_OPTIONS} -o ProxyCommand='ncat --proxy-type socks5 --proxy ${SSH_SOCKS5_PROXY} %h %p'"
     export GIT_SSH_COMMAND="ssh ${SSH_OPTIONS}"

@@ -29,8 +29,6 @@ apt-get install -y screen
 BASH_PROFILE=$(
 cat << "EOF"
 
-export BASH_PROFILE_EXECUTED=1
-
 # Shell.
 source /root/.bashrc
 
@@ -59,10 +57,6 @@ su - $FIXUID_USER \
     -c "cp ~/.bashrc ~/.bashrc.bak"
 BASHRC=$(
 cat << 'EOF'
-
-if [ -n "$BASH_PROFILE_EXECUTED" ] ; then
-    return
-fi
 
 export BASHRC_EXECUTED=1
 
