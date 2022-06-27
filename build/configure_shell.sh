@@ -6,36 +6,14 @@ trap "echo 'error: Script failed: see failed command above'" ERR
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 mv /root/.bashrc /root/.oh-my-bash.bashrc
 
-# Install ble.sh
-apt-get install -y gawk
-git clone --recursive https://github.com/akinomyoga/ble.sh.git /tmp/ble.sh
-cd /tmp/ble.sh
-make
-make install INSDIR=/root/.blesh
-rm -rf /tmp/ble.sh
-
-# Combine.
 BASHRC_CONFIG=$(
 cat << "EOF"
-
-# ble.sh
-if [ -n "$ENABLE_BLE_SH" ] ; then
-    [[ $- == *i* ]] && source /root/.blesh/ble.sh --noattach
-fi
 
 # oh-my.zsh
 if [ -z "$DISABLE_OH_MY_BASH" ] ; then
     export DISABLE_UPDATE_PROMPT=true
     export DISABLE_AUTO_UPDATE=true
     source /root/.oh-my-bash.bashrc
-fi
-
-# direnv (cannot be placed in devel_shared_reentrant.sh due to prompt setup conflict)
-eval "$(direnv hook bash)"
-
-# ble.sh
-if [ -n "$ENABLE_BLE_SH" ] ; then
-    [[ ${BLE_VERSION-} ]] && ble-attach
 fi
 
 EOF

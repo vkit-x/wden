@@ -41,6 +41,9 @@ if [ -n "$CUSTOMIZED_REENTRANT_SH" ] ; then
     source "$CUSTOMIZED_REENTRANT_SH"
 fi
 
+# Direnv.
+eval "$(direnv hook bash)"
+
 # Attach screen session.
 if [ -z "$DISABLE_SCREEN_DAEMON" ] && [ -z "$IN_DOCKER_RUN_SESSION" ] && [ -z "$STY" ] ; then
     SCREEN_LIST=$(screen -list)
