@@ -7,16 +7,16 @@
 * [Usage](#Usage)
 	* [UID and GID forwarding](#UID-and-GID-forwarding)
 	* [Change the default cd folder](#Change-the-default-cd-folder)
+	* [HTTP proxy setup](#HTTP-proxy-setup)
 	* [SSH agent forwarding in macOS](#SSH-agent-forwarding-in-macOS)
 	* [SSH agent forwarding in Linux](#SSH-agent-forwarding-in-Linux)
 	* [SSH proxy](#SSH-proxy)
-	* [SSH login](#SSH-login)
+	* [SSH login to container](#SSH-login-to-container)
 	* [Git config forwarding](#Git-config-forwarding)
-	* [Switch to APT mirror sites in China](#Switch-to-APT-mirror-sites-in-China)
-	* [Use PyPI mirror sites in China](#Use-PyPI-mirror-sites-in-China)
 	* [Bash history forwarding](#Bash-history-forwarding)
 	* [Running as daemon](#Running-as-daemon)
-	* [HTTP proxy setup](#HTTP-proxy-setup)
+	* [Switch to APT mirror sites in China](#Switch-to-APT-mirror-sites-in-China)
+	* [Use PyPI mirror sites in China](#Use-PyPI-mirror-sites-in-China)
 	* [Customized scirpts](#Customized-scirpts)
 
 
@@ -143,6 +143,41 @@ alias cd='HOME='\''/data'\'' cd'
 OUTPUT
 ```
 
+### HTTP proxy setup
+
+Env:
+
+* `PROPAGATE_HTTPS_PROXY`: If set, will propagate `HTTPS_PROXY` to `HTTP_PROXY`, `https_proxy`, and `http_proxy`
+
+```bash
+#####################
+# IN THE HOST SHELL #
+#####################
+docker run \
+  --rm -it \
+  -e PROPAGATE_HTTPS_PROXY=1 \
+  --add-host host.docker.internal:host-gateway \
+  -e HTTPS_PROXY='http://host.docker.internal:8889' \
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
+
+##########################
+# IN THE CONTAINER SHELL #
+##########################
+cat << EOF
+${HTTPS_PROXY}
+${HTTP_PROXY}
+${https_proxy}
+${http_proxy}
+EOF
+
+<< OUTPUT
+http://host.docker.internal:8889
+http://host.docker.internal:8889
+http://host.docker.internal:8889
+http://host.docker.internal:8889
+OUTPUT
+```
+
 ### SSH agent forwarding in macOS
 
 ```bash
@@ -232,6 +267,7 @@ docker run \
   --rm -it \
   -v /run/host-services/ssh-auth.sock:/run/ssh-auth.sock:shared \
   -e SSH_AUTH_SOCK="/run/ssh-auth.sock" \
+  --add-host host.docker.internal:host-gateway \
   -e SSH_SOCKS5_PROXY="host.docker.internal:1089" \
   wden/wden:devel-cpu-ubuntu20.04-python3.8
 
@@ -255,7 +291,7 @@ Hi huntzhan! You've successfully authenticated, but GitHub does not provide shel
 OUTPUT
 ```
 
-### SSH login
+### SSH login to container
 
 Env:
 
@@ -301,6 +337,41 @@ user.name=Hunt Zhan
 user.email=huntzhan.dev@gmail.com
 credential.helper=osxkeychain
 OUTPUT
+```
+
+### Bash history forwarding
+
+```bash
+#####################
+# IN THE HOST SHELL #
+#####################
+# "$HOME"/.bash_history will be forwarded to and changed by the container.
+# https://ss64.com/bash/history.html
+# NOTE: backup ~/.bash_history if you want to forward it.
+docker run \
+  --rm -it \
+  -v /path/to/your/bash_history:/run/.bash_history \
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
+
+##########################
+# IN THE CONTAINER SHELL #
+##########################
+history
+<< OUTPUT
+<Same bash history as host>
+OUTPUT
+```
+
+### Running as daemon
+
+```bash
+#####################
+# IN THE HOST SHELL #
+#####################
+# NOTE: `-it` must be added.
+docker run \
+  -d -it \
+  wden/wden:devel-cpu-ubuntu20.04-python3.8
 ```
 
 ### Switch to APT mirror sites in China
@@ -355,79 +426,6 @@ docker run \
 echo $PIP_INDEX_URL
 << OUTPUT
 https://mirrors.cloud.tencent.com/pypi/simple/
-OUTPUT
-```
-
-### Bash history forwarding
-
-```bash
-#####################
-# IN THE HOST SHELL #
-#####################
-# "$HOME"/.bash_history will be forwarded to and changed by the container.
-# https://ss64.com/bash/history.html
-docker run \
-  -d -it \
-  wden/wden:devel-cpu-ubuntu20.04-python3.8
-
-##########################
-# IN THE CONTAINER SHELL #
-##########################
-history
-<< OUTPUT
-<Same bash history as host>
-OUTPUT
-```
-
-### Running as daemon
-
-```bash
-#####################
-# IN THE HOST SHELL #
-#####################
-# NOTE: `-it` must be added.
-docker run \
-  -d -it \
-  wden/wden:devel-cpu-ubuntu20.04-python3.8
-```
-
-### HTTP proxy setup
-
-Env:
-
-* `PROPAGATE_HTTPS_PROXY`: If set, will propagate `HTTPS_PROXY` to `HTTP_PROXY`, `https_proxy`, and `http_proxy`
-
-```bash
-#####################
-# IN THE HOST SHELL #
-#####################
-docker run \
-  --rm -it \
-  -e PROPAGATE_HTTPS_PROXY=1 \
-  -e HTTPS_PROXY='http://host.docker.internal:8889' \
-  wden/wden:devel-cpu-ubuntu20.04-python3.8
-
-##########################
-# IN THE CONTAINER SHELL #
-##########################
-echo $HTTPS_PROXY
-<< OUTPUT
-http://host.docker.internal:8889
-OUTPUT
-
-echo $HTTP_PROXY
-<< OUTPUT
-http://host.docker.internal:8889
-OUTPUT
-
-echo $https_proxy
-<< OUTPUT
-http://host.docker.internal:8889
-OUTPUT
-
-echo $http_proxy
-<< OUTPUT
-http://host.docker.internal:8889
 OUTPUT
 ```
 
