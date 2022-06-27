@@ -24,9 +24,11 @@ if [ -n "$ENABLE_BLE_SH" ] ; then
 fi
 
 # oh-my.zsh
-export DISABLE_UPDATE_PROMPT=true
-export DISABLE_AUTO_UPDATE=true
-source /root/.oh-my-bash.bashrc
+if [ -n "$ENABLE_OH_MY_BASH" ] ; then
+    export DISABLE_UPDATE_PROMPT=true
+    export DISABLE_AUTO_UPDATE=true
+    source /root/.oh-my-bash.bashrc
+fi
 
 # Python.
 if [ -f ~/.bash_python ]; then

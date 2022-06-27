@@ -42,7 +42,6 @@ declare -a pkgs=(
     unzip
     p7zip-full
     git
-    direnv
 )
 
 apt-get install -y "${pkgs[@]}"
