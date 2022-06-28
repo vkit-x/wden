@@ -1,5 +1,5 @@
 
-# Table of Contents
+## Table of Contents
 * [Overview](#Overview)
 * [Images](#Images)
 	* [Hosted in Docker Hub](#Hosted-in-Docker-Hub)
@@ -14,15 +14,21 @@
 	* [SSH login to container](#SSH-login-to-container)
 	* [Git config forwarding](#Git-config-forwarding)
 	* [Bash history forwarding](#Bash-history-forwarding)
-	* [Running as daemon](#Running-as-daemon)
-	* [Switch to APT mirror sites in China](#Switch-to-APT-mirror-sites-in-China)
-	* [Use PyPI mirror sites in China](#Use-PyPI-mirror-sites-in-China)
-	* [Customized scirpts](#Customized-scirpts)
+	* [Run as daemon](#Run-as-daemon)
+	* [Use APT mirror sites](#Use-APT-mirror-sites)
+	* [Use PyPI mirror sites](#Use-PyPI-mirror-sites)
+	* [Run customized scirpts](#Run-customized-scirpts)
 
 
 ## Overview
 
-wden project attempts to provide the best practices to use docker container as development environment for researcher and algorithm engineer.
+Goals
+
+- Attempt to provide an out-of-the-box experience to use docker container as the development environment, especially for Python developer, ML/DL engineer & researcher.
+- Setup a project boilerplate that is easy to understand. User with bash scripting and docker experience should be able to modify or extend the current codebase within 10 mins. While this project ships with the Python toolchain, most of the setup is not bound to Python, but instead is related to development experience (see the [Usage](#Usage) session). Hence this project could be extend to support variant scope development.
+
+Section [Images](#Images) documents the out-of-the-box prebuilt images.
+Section [Usage](#Usage) documents the typical use cases with examples.
 
 ## Images
 
@@ -317,6 +323,8 @@ ssh wden@localhost \
     -o IdentityFile=/path/to/wden-ssh-key/ssh_wden_rsa_key
 ```
 
+Vscode `Remote - SSH` is well supported!
+
 ### Git config forwarding
 
 ```bash
@@ -362,7 +370,7 @@ history
 OUTPUT
 ```
 
-### Running as daemon
+### Run as daemon
 
 ```bash
 #####################
@@ -374,7 +382,7 @@ docker run \
   wden/wden:devel-cpu-ubuntu20.04-python3.8
 ```
 
-### Switch to APT mirror sites in China
+### Use APT mirror sites
 
 Env:
 
@@ -404,7 +412,7 @@ Get:5 http://mirrors.cloud.tencent.com/ubuntu bionic/universe Sources [11.5 MB]
 OUTPUT
 ```
 
-### Use PyPI mirror sites in China
+### Use PyPI mirror sites
 
 Env:
 
@@ -429,7 +437,7 @@ https://mirrors.cloud.tencent.com/pypi/simple/
 OUTPUT
 ```
 
-### Customized scirpts
+### Run customized scirpts
 
 Env:
 

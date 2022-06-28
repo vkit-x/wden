@@ -62,7 +62,7 @@ def build(readme_md, main_yml, output):
     result.check_returncode()
     toc = result.stdout.decode().strip()
 
-    template = template.replace('[TOC]', f'\n{toc}\n')
+    template = template.replace('[TOC]', f'\n#{toc}\n')
 
     # Tables.
     config = yaml.safe_load(io.file(main_yml, exists=True).read_text())
