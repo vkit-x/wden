@@ -38,6 +38,7 @@ declare -a pkgs=(
     build-essential
 
     # Utility.
+    rsync
     zip
     unzip
     p7zip-full
