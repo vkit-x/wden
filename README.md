@@ -16,6 +16,7 @@
 	* [Bash history forwarding](#Bash-history-forwarding)
 	* [Run as daemon](#Run-as-daemon)
 	* [Use APT mirror sites](#Use-APT-mirror-sites)
+	* [Upgrade `pip` to the latest version](#Upgrade-`pip`-to-the-latest-version)
 	* [Use PyPI mirror sites](#Use-PyPI-mirror-sites)
 	* [Run customized scirpts](#Run-customized-scirpts)
 
@@ -411,6 +412,12 @@ Get:5 http://mirrors.cloud.tencent.com/ubuntu bionic/universe Sources [11.5 MB]
 ...
 OUTPUT
 ```
+
+### Upgrade `pip` to the latest version
+
+Env:
+
+* `PIP_UPGRADE_TO_LATEST`: If set, `pip` will be upgraded to the latest version.
 
 ### Use PyPI mirror sites
 

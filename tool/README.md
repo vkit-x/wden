@@ -374,6 +374,12 @@ Get:5 http://mirrors.cloud.tencent.com/ubuntu bionic/universe Sources [11.5 MB]
 OUTPUT
 ```
 
+### Upgrade `pip` to the latest version
+
+Env:
+
+* `PIP_UPGRADE_TO_LATEST`: If set, `pip` will be upgraded to the latest version.
+
 ### Use PyPI mirror sites
 
 Env:
