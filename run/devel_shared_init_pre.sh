@@ -44,6 +44,11 @@ if [ -n "$SSHD_PORT" ] ; then
     sudo service ssh start
 fi
 
+# Pip.
+if [ -n "$PIP_UPGRADE_TO_LATEST" ] ; then
+    python -m pip install -U pip
+fi
+
 # Screen session.
 if [ -z "$DISABLE_SCREEN_DAEMON" ] ; then
     # screen config.
