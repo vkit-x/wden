@@ -7,7 +7,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/mast
 mv /root/.bashrc /root/.oh-my-bash.bashrc
 
 BASHRC_CONFIG=$(
-cat << "EOF"
+cat << 'EOF'
 
 # oh-my.zsh
 if [ -z "$DISABLE_OH_MY_BASH" ] ; then
@@ -27,7 +27,7 @@ chmod -R 755 /root/
 apt-get install -y screen
 
 BASH_PROFILE=$(
-cat << "EOF"
+cat << 'EOF'
 
 # Shell.
 source /root/.bashrc

@@ -52,8 +52,9 @@ if [ -z "$DISABLE_SCREEN_DAEMON" ] \
         && [ -z "$STY" ] ; then
     SCREEN_LIST=$(screen -list)
     if [[ "$SCREEN_LIST" =~ "Attached" ]] ; then
-        echo "Attached screen session detected, stop attaching..."
+        echo "screen session was attached, stop attaching..."
     else
         screen -a -A -U -r
+        exit
     fi
 fi

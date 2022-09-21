@@ -127,4 +127,22 @@ EOF
 )
 echo "$BASH_SESSION_ENV" | tee -a ~/.bash-session-env > /dev/null
 
+BASH_SESSION_ENV=$(
+cat << 'EOF'
+
+# Disable logout & exit command if is in screen session.
+function _nop {
+    echo 'Use (Ctrl+n d) to to leave the shell.'
+}
+
+if [ -n "$STY" ] ; then
+    set -o ignoreeof
+    alias logout=_nop
+    alias exit=_nop
+fi
+
+EOF
+)
+echo "$BASH_SESSION_ENV" | tee -a ~/.bash-session-env > /dev/null
+
 echo "Finished container setup..."
