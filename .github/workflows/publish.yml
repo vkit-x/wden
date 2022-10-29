@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         # Follows the pytorch supported CUDA versions.
-        cuda_version: ["11.3.1", "11.6.2"]
+        cuda_version: ["11.6.2", "11.7.1"]
         cudnn_version: ["8"]
         ubuntu_version: ["20.04"]
         python_version: ["3.8", "3.9", "3.10"]
