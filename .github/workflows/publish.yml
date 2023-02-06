@@ -6,12 +6,25 @@ jobs:
     strategy:
       matrix:
         # Follows the pytorch supported CUDA versions.
-        cuda_version: ["11.6.2", "11.7.1"]
-        cudnn_version: ["8"]
-        ubuntu_version: ["20.04"]
-        python_version: ["3.8", "3.9", "3.10"]
+        cuda_version:
+          - 11.6.2
+          - 11.7.1
+        cudnn_version:
+          - 8
+        ubuntu_version:
+          - 20.04
+        python_version:
+          - 3.8
+          - 3.9
+          - 3.10
+          - 3.11
+        include:
+          - cuda_version: 11.1.1
+            cudnn_version: 8
+            ubuntu_version: 20.04
+            python_version: 3.8
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Docker build & push
         run: |
           export TAG=devel-cuda${{ matrix.cuda_version }}-cudnn${{ matrix.cudnn_version }}-ubuntu${{ matrix.ubuntu_version }}-python${{ matrix.python_version }}
@@ -43,7 +56,7 @@ jobs:
         ubuntu_version: ["20.04"]
         python_version: ["3.8", "3.9", "3.10"]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Docker build & push
         run: |

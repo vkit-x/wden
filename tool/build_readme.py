@@ -1,3 +1,12 @@
+'''
+pip install -r tool/requirements.txt
+
+fib tool/build_readme.py:build \
+    --readme_md="./tool/README.md" \
+    --main_yml="./.github/workflows/publish.yml" \
+    --output="./README.md"
+'''
+
 import subprocess
 import iolite as io
 import yaml
@@ -5,6 +14,7 @@ import itertools
 
 
 def combination(matrix):
+    matrix.pop('include', None)
     excludes = matrix.pop('exclude', [])
 
     comb = []
