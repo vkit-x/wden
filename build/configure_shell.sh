@@ -30,6 +30,35 @@ echo "Install screen."
 # Required by daemon session.
 apt-get install -y screen
 
+echo "Setup .bashrc for wden user."
+# Backup the original ~/.bashrc.
+# NOTE: The `-` is short for `--login`, meaning a login shell will be started.
+# Since login shell loads .bash_profile, executing this `su - ...` statement before changing
+# .bash_profile can mitigate confusing error message.
+su - $FIXUID_USER \
+    -c "cp ~/.bashrc ~/.bashrc.bak"
+# This script is invoked as an interactive non-login shell.
+# https://www.gnu.org/software/bash/manual/html_node/Bash-Startup-Files.html
+#
+# Hence, the following script will be executed for shell attached to screen session.
+BASHRC=$(
+cat << 'EOF'
+
+export BASHRC_EXECUTED=1
+
+# Load oh-my-zsh.
+source /root/.bashrc
+
+# Load Python.
+source ~/.bash_python
+
+# Phrase reentrant.
+source ~/.bash-session-env
+source "$WDEN_RUN_FOLDER"/run_${WDEN_RUN_TAG}_reentrant.sh
+
+EOF
+)
+echo "$BASHRC" | tee "/home/${FIXUID_USER}/.bashrc" > /dev/null
 
 echo "Setup the .bash_profile for wden user."
 # This script is invoked as an interactive login shell, or with --login.
@@ -85,30 +114,3 @@ fi
 EOF
 )
 echo "$BASH_PROFILE" | tee "/home/${FIXUID_USER}/.bash_profile" > /dev/null
-
-echo "Setup .bashrc for wden user."
-#
-# This script is invoked as an interactive non-login shell.
-# https://www.gnu.org/software/bash/manual/html_node/Bash-Startup-Files.html
-#
-# Hence, the following script will be executed for shell attached to screen session.
-su - $FIXUID_USER \
-    -c "cp ~/.bashrc ~/.bashrc.bak"
-BASHRC=$(
-cat << 'EOF'
-
-export BASHRC_EXECUTED=1
-
-# Load oh-my-zsh.
-source /root/.bashrc
-
-# Load Python.
-source ~/.bash_python
-
-# Phrase reentrant.
-source ~/.bash-session-env
-source "$WDEN_RUN_FOLDER"/run_${WDEN_RUN_TAG}_reentrant.sh
-
-EOF
-)
-echo "$BASHRC" | tee "/home/${FIXUID_USER}/.bashrc" > /dev/null
