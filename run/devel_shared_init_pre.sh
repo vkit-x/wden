@@ -10,6 +10,7 @@ function patch_file_permission {
         echo "WARNING: Patching the permissions of FILE=${FILE}" \
              "${CUR_OCTAL_PERMISSIONS} => ${OCTAL_PERMISSIONS}"
         sudo chmod "$OCTAL_PERMISSIONS" "$FILE"
+        echo "Done."
     fi
 }
 
