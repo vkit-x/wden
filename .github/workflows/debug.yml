@@ -31,8 +31,8 @@ jobs:
             .
 
           docker login \
-            --username="${{ secrets.HUAWEICLOUD_AREA }}@${{ secrets.HUAWEICLOUD_AK }}" \
-            --password=${{ secrets.HUAWEICLOUD_TOKEN }} \
-            "swr.${{ secrets.HUAWEICLOUD_AREA }}.myhuaweicloud.com"
-          docker tag wden/wden:"$TAG" swr."${{ secrets.HUAWEICLOUD_AREA }}".myhuaweicloud.com/wden/wden:"$TAG"
-          docker push swr."${{ secrets.HUAWEICLOUD_AREA }}".myhuaweicloud.com/wden/wden:"$TAG"
+            --username="${{ secrets.WDEN_HUAWEICLOUD_AREA }}@${{ secrets.WDEN_HUAWEICLOUD_AK }}" \
+            --password=${{ secrets.WDEN_HUAWEICLOUD_TOKEN }} \
+            "swr.${{ secrets.WDEN_HUAWEICLOUD_AREA }}.myhuaweicloud.com"
+          docker tag wden/wden:"$TAG" swr."${{ secrets.WDEN_HUAWEICLOUD_AREA }}".myhuaweicloud.com/wden/wden:"$TAG"
+          docker push swr."${{ secrets.WDEN_HUAWEICLOUD_AREA }}".myhuaweicloud.com/wden/wden:"$TAG"
