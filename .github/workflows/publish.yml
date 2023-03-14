@@ -40,15 +40,15 @@ jobs:
             -f dockerfile/devel_cuda \
             .
 
-          docker login --username=wden --password=${{ secrets.DOCKER_PASSWORD }}
+          docker login --username=wden --password=${{ secrets.WDEN_DOCKER_PASSWORD }}
           docker push wden/wden:"$TAG"
 
           docker login \
-            --username="${{ secrets.HUAWEICLOUD_AREA }}@${{ secrets.HUAWEICLOUD_AK }}" \
-            --password=${{ secrets.HUAWEICLOUD_TOKEN }} \
-            "swr.${{ secrets.HUAWEICLOUD_AREA }}.myhuaweicloud.com"
-          docker tag wden/wden:"$TAG" swr."${{ secrets.HUAWEICLOUD_AREA }}".myhuaweicloud.com/wden/wden:"$TAG"
-          docker push swr."${{ secrets.HUAWEICLOUD_AREA }}".myhuaweicloud.com/wden/wden:"$TAG"
+            --username="${{ secrets.WDEN_HUAWEICLOUD_AREA }}@${{ secrets.WDEN_HUAWEICLOUD_AK }}" \
+            --password=${{ secrets.WDEN_HUAWEICLOUD_TOKEN }} \
+            "swr.${{ secrets.WDEN_HUAWEICLOUD_AREA }}.myhuaweicloud.com"
+          docker tag wden/wden:"$TAG" swr."${{ secrets.WDEN_HUAWEICLOUD_AREA }}".myhuaweicloud.com/wden/wden:"$TAG"
+          docker push swr."${{ secrets.WDEN_HUAWEICLOUD_AREA }}".myhuaweicloud.com/wden/wden:"$TAG"
   build-cpu:
     runs-on: ubuntu-latest
     strategy:
@@ -80,8 +80,8 @@ jobs:
           docker push wden/wden:"$TAG"
 
           docker login \
-            --username="${{ secrets.HUAWEICLOUD_AREA }}@${{ secrets.HUAWEICLOUD_AK }}" \
-            --password=${{ secrets.HUAWEICLOUD_TOKEN }} \
-            "swr.${{ secrets.HUAWEICLOUD_AREA }}.myhuaweicloud.com"
-          docker tag wden/wden:"$TAG" swr."${{ secrets.HUAWEICLOUD_AREA }}".myhuaweicloud.com/wden/wden:"$TAG"
-          docker push swr."${{ secrets.HUAWEICLOUD_AREA }}".myhuaweicloud.com/wden/wden:"$TAG"
+            --username="${{ secrets.WDEN_HUAWEICLOUD_AREA }}@${{ secrets.WDEN_HUAWEICLOUD_AK }}" \
+            --password=${{ secrets.WDEN_HUAWEICLOUD_TOKEN }} \
+            "swr.${{ secrets.WDEN_HUAWEICLOUD_AREA }}.myhuaweicloud.com"
+          docker tag wden/wden:"$TAG" swr."${{ secrets.WDEN_HUAWEICLOUD_AREA }}".myhuaweicloud.com/wden/wden:"$TAG"
+          docker push swr."${{ secrets.WDEN_HUAWEICLOUD_AREA }}".myhuaweicloud.com/wden/wden:"$TAG"
