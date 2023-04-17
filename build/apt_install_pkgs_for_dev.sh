@@ -56,3 +56,9 @@ source /etc/os-release
 apt-add-repository -y "deb https://apt.kitware.com/ubuntu/ ${UBUNTU_CODENAME} main"
 apt-get update
 apt-get install -y cmake
+
+# Install watchexec.
+wget 'https://github.com/watchexec/watchexec/releases/download/v1.22.2/watchexec-1.22.2-x86_64-unknown-linux-musl.deb' \
+    -O /tmp/watchexec-1.22.2-x86_64-unknown-linux-musl.deb
+apt-get install -y /tmp/watchexec-1.22.2-x86_64-unknown-linux-musl.deb
+rm -f /tmp/watchexec-1.22.2-x86_64-unknown-linux-musl.deb
