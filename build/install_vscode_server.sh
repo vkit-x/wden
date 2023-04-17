@@ -23,3 +23,14 @@ su - $FIXUID_USER \
     -c "${CODE_SERVER} --install-extension editorconfig.editorconfig"
 su - $FIXUID_USER \
     -c "${CODE_SERVER} --install-extension canna.box-comment"
+# Remove jupyter plugins.
+su - $FIXUID_USER \
+    -c "${CODE_SERVER} --uninstall-extension ms-toolsai.jupyter" || true
+su - $FIXUID_USER \
+    -c "${CODE_SERVER} --uninstall-extension ms-toolsai.vscode-jupyter-cell-tags" || true
+su - $FIXUID_USER \
+    -c "${CODE_SERVER} --uninstall-extension ms-toolsai.jupyter-keymap" || true
+su - $FIXUID_USER \
+    -c "${CODE_SERVER} --uninstall-extension ms-toolsai.jupyter-renderers" || true
+su - $FIXUID_USER \
+    -c "${CODE_SERVER} --uninstall-extension ms-toolsai.vscode-jupyter-slideshow" || true
