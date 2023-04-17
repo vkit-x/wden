@@ -62,3 +62,11 @@ wget 'https://github.com/watchexec/watchexec/releases/download/v1.22.2/watchexec
     -O /tmp/watchexec-1.22.2-x86_64-unknown-linux-musl.deb
 apt-get install -y /tmp/watchexec-1.22.2-x86_64-unknown-linux-musl.deb
 rm -f /tmp/watchexec-1.22.2-x86_64-unknown-linux-musl.deb
+
+# Install pyright.
+curl -sL https://deb.nodesource.com/setup_18.x | bash -
+apt-get install -y nodejs
+node -v
+npm -v
+npm install -g pyright
+pyright --version
