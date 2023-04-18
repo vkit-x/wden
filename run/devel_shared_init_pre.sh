@@ -90,7 +90,8 @@ EOF
     if [ -n "$SCREEN_DAEMON_LOG" ] ; then
         args=(-L -Logfile "$SCREEN_DAEMON_LOG")
     fi
-    screen -dmS daemon "${args[@]}"
+    # Setting `-e` to avoid conflicts with C-a binding.
+    screen -dmS daemon -e '^Nn' "${args[@]}"
 fi
 
 BASH_SESSION_ENV=$(
