@@ -45,6 +45,13 @@ if [ -n "$SSHD_PORT" ] ; then
     sudo service ssh start
 fi
 
+# Pip index.
+if [ -n "$PIP_SET_INDEX_TENCENT" ] ; then
+    export PIP_INDEX_URL='https://mirrors.cloud.tencent.com/pypi/simple/'
+elif [ -n "$PIP_SET_INDEX_ALIYUN" ] ; then
+    export PIP_INDEX_URL='https://mirrors.aliyun.com/pypi/simple/'
+fi
+
 # Pip.
 if [ -n "$PIP_UPGRADE_TO_LATEST" ] ; then
     python -m pip install -U pip
@@ -119,6 +126,9 @@ export FIXUID_GROUP='$FIXUID_GROUP'
 export WDEN_BUILD_FOLDER='$WDEN_BUILD_FOLDER'
 export WDEN_RUN_FOLDER='$WDEN_RUN_FOLDER'
 export WDEN_RUN_TAG='$WDEN_RUN_TAG'
+
+# Pip.
+export PIP_INDEX_URL='$PIP_INDEX_URL'
 
 # HTTP proxy.
 export HTTPS_PROXY='$HTTPS_PROXY'

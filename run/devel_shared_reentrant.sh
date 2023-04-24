@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
 
-# PIP index.
-if [ -n "$PIP_SET_INDEX_TENCENT" ] ; then
-    export PIP_INDEX_URL='https://mirrors.cloud.tencent.com/pypi/simple/'
-elif [ -n "$PIP_SET_INDEX_ALIYUN" ] ; then
-    export PIP_INDEX_URL='https://mirrors.aliyun.com/pypi/simple/'
-fi
-
 # Home folder.
 if [ -n "$CD_DEFAULT_FOLDER" ] ; then
     if [ -d "$CD_DEFAULT_FOLDER" ] ; then
@@ -58,3 +51,8 @@ if [ -z "$DISABLE_SCREEN_DAEMON" ] \
         exit
     fi
 fi
+
+function reattach-screen-session {
+    screen -d -r
+    exit
+}
