@@ -1,5 +1,8 @@
 name: publish
-on: workflow_dispatch
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
 jobs:
   build-cuda:
     runs-on: ubuntu-latest
