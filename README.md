@@ -42,13 +42,21 @@ Supported constructs are as followed:
 | --------- | -------------------- |
 | CUDA=11.6.2, CUDNN=8, PYTHON=3.10, UBUNTU=20.04 | `docker pull wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.10` |
 | CUDA=11.6.2, CUDNN=8, PYTHON=3.11, UBUNTU=20.04 | `docker pull wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.11` |
+| CUDA=11.6.2, CUDNN=8, PYTHON=3.12, UBUNTU=20.04 | `docker pull wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.12` |
 | CUDA=11.6.2, CUDNN=8, PYTHON=3.8, UBUNTU=20.04 | `docker pull wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.8` |
 | CUDA=11.6.2, CUDNN=8, PYTHON=3.9, UBUNTU=20.04 | `docker pull wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.9` |
 | CUDA=11.7.1, CUDNN=8, PYTHON=3.10, UBUNTU=20.04 | `docker pull wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.10` |
 | CUDA=11.7.1, CUDNN=8, PYTHON=3.11, UBUNTU=20.04 | `docker pull wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.11` |
+| CUDA=11.7.1, CUDNN=8, PYTHON=3.12, UBUNTU=20.04 | `docker pull wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.12` |
 | CUDA=11.7.1, CUDNN=8, PYTHON=3.8, UBUNTU=20.04 | `docker pull wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.8` |
 | CUDA=11.7.1, CUDNN=8, PYTHON=3.9, UBUNTU=20.04 | `docker pull wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.9` |
+| CUDA=11.8.0, CUDNN=8, PYTHON=3.10, UBUNTU=20.04 | `docker pull wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.10` |
+| CUDA=11.8.0, CUDNN=8, PYTHON=3.11, UBUNTU=20.04 | `docker pull wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.11` |
+| CUDA=11.8.0, CUDNN=8, PYTHON=3.12, UBUNTU=20.04 | `docker pull wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.12` |
+| CUDA=11.8.0, CUDNN=8, PYTHON=3.8, UBUNTU=20.04 | `docker pull wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.8` |
+| CUDA=11.8.0, CUDNN=8, PYTHON=3.9, UBUNTU=20.04 | `docker pull wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.9` |
 | PYTHON=3.10, UBUNTU=20.04 | `docker pull wden/wden:devel-cpu-ubuntu20.04-python3.10` |
+| PYTHON=3.11, UBUNTU=20.04 | `docker pull wden/wden:devel-cpu-ubuntu20.04-python3.11` |
 | PYTHON=3.8, UBUNTU=20.04 | `docker pull wden/wden:devel-cpu-ubuntu20.04-python3.8` |
 | PYTHON=3.9, UBUNTU=20.04 | `docker pull wden/wden:devel-cpu-ubuntu20.04-python3.9` |
 
@@ -62,13 +70,21 @@ As a known issue, pulling from docker hub is intolerably slow for users in China
 | --------- | -------------------- |
 | CUDA=11.6.2, CUDNN=8, PYTHON=3.10, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.10 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.10 wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.10 ` |
 | CUDA=11.6.2, CUDNN=8, PYTHON=3.11, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.11 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.11 wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.11 ` |
+| CUDA=11.6.2, CUDNN=8, PYTHON=3.12, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.12 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.12 wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.12 ` |
 | CUDA=11.6.2, CUDNN=8, PYTHON=3.8, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.8 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.8 wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.8 ` |
 | CUDA=11.6.2, CUDNN=8, PYTHON=3.9, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.9 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.9 wden/wden:devel-cuda11.6.2-cudnn8-ubuntu20.04-python3.9 ` |
 | CUDA=11.7.1, CUDNN=8, PYTHON=3.10, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.10 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.10 wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.10 ` |
 | CUDA=11.7.1, CUDNN=8, PYTHON=3.11, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.11 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.11 wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.11 ` |
+| CUDA=11.7.1, CUDNN=8, PYTHON=3.12, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.12 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.12 wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.12 ` |
 | CUDA=11.7.1, CUDNN=8, PYTHON=3.8, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.8 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.8 wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.8 ` |
 | CUDA=11.7.1, CUDNN=8, PYTHON=3.9, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.9 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.9 wden/wden:devel-cuda11.7.1-cudnn8-ubuntu20.04-python3.9 ` |
+| CUDA=11.8.0, CUDNN=8, PYTHON=3.10, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.10 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.10 wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.10 ` |
+| CUDA=11.8.0, CUDNN=8, PYTHON=3.11, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.11 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.11 wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.11 ` |
+| CUDA=11.8.0, CUDNN=8, PYTHON=3.12, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.12 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.12 wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.12 ` |
+| CUDA=11.8.0, CUDNN=8, PYTHON=3.8, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.8 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.8 wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.8 ` |
+| CUDA=11.8.0, CUDNN=8, PYTHON=3.9, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.9 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.9 wden/wden:devel-cuda11.8.0-cudnn8-ubuntu20.04-python3.9 ` |
 | PYTHON=3.10, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cpu-ubuntu20.04-python3.10 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cpu-ubuntu20.04-python3.10 wden/wden:devel-cpu-ubuntu20.04-python3.10 ` |
+| PYTHON=3.11, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cpu-ubuntu20.04-python3.11 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cpu-ubuntu20.04-python3.11 wden/wden:devel-cpu-ubuntu20.04-python3.11 ` |
 | PYTHON=3.8, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cpu-ubuntu20.04-python3.8 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cpu-ubuntu20.04-python3.8 wden/wden:devel-cpu-ubuntu20.04-python3.8 ` |
 | PYTHON=3.9, UBUNTU=20.04 | `docker pull swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cpu-ubuntu20.04-python3.9 && docker tag swr.cn-east-3.myhuaweicloud.com/wden/wden:devel-cpu-ubuntu20.04-python3.9 wden/wden:devel-cpu-ubuntu20.04-python3.9 ` |
 
